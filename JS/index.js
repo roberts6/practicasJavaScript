@@ -15,6 +15,13 @@ let numeroFav = prompt("Tu número favorito del 1 al 10")
 let pesos = (anos * numeroFav) / 5
 alert("Hoy te vas a encontrar $ " + pesos )
 
+//imprimir en el HTML // se usan comillas simples invertidas
+let imprimirEnPantalla = document.getElementById("imprimirEnHTML");
+imprimirEnPantalla.innerHTML= `
+<h1> Hoy vienen ${amigos} amigos a tu casa </h1>
+<h3> pero por favor no te olvides las ${cocas} cocas. Sino la milanesa de ${milanesa} te queda atorada</h3>
+`;
+
 
 
 //torneos ganados
@@ -25,8 +32,3 @@ let torneosLocales = 34
 let torneosBoca = copasInternacionales + copasNacionales + torneosLocales
 
 console.log ("Boca tiene " + torneosBoca + " trofeos entre copas y torneos")
-
-
-
-
-
