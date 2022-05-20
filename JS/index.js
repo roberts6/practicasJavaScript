@@ -25,14 +25,14 @@ imprimirEnPantalla.innerHTML= `
 
 //condicional --> el + antes del = concatena con el mensaje anterior
 if (amigos >= 6){
-    imprimirEnPantalla.innerHTML += `uufff ` + amigos + ` ...Son muchos. Linda juntada`;
+    imprimirEnPantalla.innerHTML += `uufff ` + amigos + ` ...Son muchos. Linda juntada.`;
 }else {
     imprimirEnPantalla.innerHTML += `Algo íntimo, me gusta`;
 }
 
 // Ciclo
 for(let i = 1; i <= amigos; i++ ){
-    imprimirEnPantalla.innerHTML += ` el amigo` + ` ` + i + ` `;
+    imprimirEnPantalla.innerHTML += ` El amigo` + ` ` + i + ` `;
 }
 
 
