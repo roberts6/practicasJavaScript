@@ -39,7 +39,7 @@ for(let i = 1; i <= amigos; i++ ){
 
 //torneos ganados
 let copasInternacionales = 22
-let copasNacionales = 15 
+let copasNacionales = 16 
 let torneosLocales = 34
 
 let torneosBoca = copasInternacionales + copasNacionales + torneosLocales
