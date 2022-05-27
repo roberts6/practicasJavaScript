@@ -83,12 +83,21 @@ switch (amigos % 2) {
         break;
 
     default:
-            imprimirEnPantalla.innerHTML += ` <h2> Si son ${amigos} les falta 1 para el truco <h2>`
+            imprimirEnPantalla.innerHTML += `<h2> Si son ${amigos} les falta 1 para el truco <h2>`
         break;
 }
 
+//calculadora
+for (let i = 1; i <=10 ; i++){
+for (let y = 1; y <=10; y++) {
+    imprimirEnPantalla.innerHTML += ` <h1> Calculadora. Tabla del ${i} </h1>
+    <h2> ${i} X ${y} = ${i * y} <h2>`
+}
+}
 
-//torneos ganados
+
+
+
 let copasInternacionales = 22
 let copasNacionales = 16 
 let torneosLocales = 34
