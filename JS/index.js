@@ -1,4 +1,4 @@
-//prompt + alert
+prompt + alert
 let milanesa = prompt("Milanesa de pollo o carne?")
 let acompanamiento = prompt("con pure o con ensalada?")
 alert("Te invito a comer milanesa de " + milanesa + " con " + acompanamiento + ". Pero la cerveza la pagás vos")
@@ -19,8 +19,8 @@ alert("Hoy te vas a encontrar $ " + pesos )
 //imprimir en el HTML // se usan comillas simples invertidas
 let imprimirEnPantalla = document.getElementById("imprimirEnHTML");
 imprimirEnPantalla.innerHTML= `
-<h1> Hoy vienen ${amigos} amigos a tu casa </h1>
-<h3> pero por favor no te olvides las ${cantidadCocas} cocas. Sino la milanesa de ${milanesa} te queda atorada</h3>
+<h1> Hoy vienen ${amigos} amigos a tu casa y ${cocas} van a tomar Fernet </h1>
+<h3> Así que por favor no te olvides las ${cantidadCocas} cocas. Sino la milanesa de ${milanesa} les queda atorada</h3>
 `;
 
 //condicional --> el + antes del = concatena con el mensaje anterior
@@ -33,6 +33,22 @@ if (amigos >= 6){
 // Ciclo
 for(let i = 1; i <= amigos; i++ ){
     imprimirEnPantalla.innerHTML += ` El amigo` + ` ` + i + ` `;
+}
+
+// while
+let estadoCivil = prompt("Cómo es tu estado sentimental?")
+while (estadoCivil !== "casado" || "casada") {
+    switch (estadoCivil) {
+        case "soltero":
+            imprimirEnPantalla.innerHTML += "divertite querido"
+            break;
+            case "soltera":
+            imprimirEnPantalla.innerHTML += "divertite querida"
+            break;
+        default:
+                imprimirEnPantalla.innerHTML += "andate a tu casa pica flor"
+            break;
+    }
 }
 
 
