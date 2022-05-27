@@ -79,7 +79,7 @@ while (estadoCivil !== "casado" || "casada") {
 
 switch (amigos % 2) {
     case 0:
-        imprimirEnPantalla.innerHTML += ` <h2> Si son ` + amigos + ` da para jugar al truco de a 3 </h2>`
+        imprimirEnPantalla.innerHTML += ` <h2> Si son ` + amigos + ` da para jugar al truco en parejas. Pueden armar ` + (amigos)/2 +  ` equipos. </h2>`
         break;
 
     default:
