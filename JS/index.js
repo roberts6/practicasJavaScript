@@ -108,18 +108,30 @@ switch (plan) {
         break;
 } */
 
-let nombre = prompt ("Hola! ¿cuál es tu nombre?")
-let edad = prompt (nombre + " ¿este año cuántos cumpliste? si aun no fue tu cumpleaños cuántos vas a cumplir?")
+ let nombre = prompt ("Hola! ingresar nombre del socio")
+let edad = prompt ("¿Cuántos años tiene " + nombre + "?")
 
-class categoria {
+ class socios {
     constructor (nombre, edad) {
 this.nombre = nombre;
 this.edad = edad;
-this.anoNacimiento = 2022 - this.edad;
+this.anoActual = 2022;
+    }
+    anoDeNacimiento(){
+        this.anoNacimiento = 2022 - this.edad;
     }
 }
 
-const categoriaNueva = new categoria(nombre, edad);
+const categoriaNueva = new socios(nombre, edad);
 console.log(categoriaNueva);
 console.log("Naciste en el año " + categoriaNueva.anoNacimiento);
-console.log("Gracias por participar " + categoriaNueva.nombre);
+console.log("Gracias por participar " + categoriaNueva.nombre); 
+
+
+
+const nuevosSocios = [];
+
+    for (const socio of nuevosSocios) {
+    nuevosSocios.push(categoriaNueva);
+    }
+console.log(nuevosSocios);  
