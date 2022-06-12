@@ -141,7 +141,7 @@ nuevosSocios.push(new socios("Mila", 3));
 
 for (const socio of nuevosSocios) {
     console.log(socio);
-    imprimirEnPantalla.innerHTML += `<h2>${socio.nombre} ` + ` `+ socio.edad + ` ${socio.anoDeNacimiento()}<h2>` + `<br> `;
+    imprimirEnPantalla.innerHTML += `<h2> Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()}<h2>` + `<br> `;
 }
 
 for (let index = 0; index <= nuevosSocios.length; index++) {
