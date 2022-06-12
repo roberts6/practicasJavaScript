@@ -108,8 +108,8 @@ switch (plan) {
         break;
 } */
 
- let nombre = prompt ("Hola! ingresar nombre del socio")
-let edad = prompt ("¿Cuántos años tiene " + nombre + "?")
+/* let nombre = prompt ("Hola! ingresar nombre del socio")
+let edad = prompt ("¿Cuántos años tiene " + nombre + "?") */
 
  class socios {
     constructor (nombre, edad) {
@@ -118,20 +118,31 @@ this.edad = edad;
 this.anoActual = 2022;
     }
     anoDeNacimiento(){
-        this.anoNacimiento = 2022 - this.edad;
+        this.anoActual - this.edad;
     }
 }
 
+
+/*  --> datos en consola
+
 const categoriaNueva = new socios(nombre, edad);
 console.log(categoriaNueva);
-console.log("Naciste en el año " + categoriaNueva.anoNacimiento);
-console.log("Gracias por participar " + categoriaNueva.nombre); 
-
+console.log("Naciste en el año " + socios.anoDeNacimiento);
+console.log("Gracias por participar " + categoriaNueva.nombre); */
 
 
 const nuevosSocios = [];
 
-    for (const socio of nuevosSocios) {
-    nuevosSocios.push(categoriaNueva);
-    }
-console.log(nuevosSocios);  
+nuevosSocios.push(new socios("Beni", 2));
+nuevosSocios.push(new socios("Oscar", 34));  
+nuevosSocios.push(new socios("Cecilia", 33));  
+
+
+for (const socio of nuevosSocios) {
+    console.log(nuevosSocios);
+}
+
+for (let index = 0; index < nuevosSocios.length; index++) {
+    const element = nuevosSocios[index];
+    
+}
