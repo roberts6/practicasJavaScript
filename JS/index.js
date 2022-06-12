@@ -139,10 +139,11 @@ nuevosSocios.push(new socios("Cecilia", 33));
 
 
 for (const socio of nuevosSocios) {
-    console.log(nuevosSocios);
+    console.log(socio);
+    imprimirEnPantalla.innerHTML += `<h2>${socio.nombre} ` + ` `+ socio.anoDeNacimiento() + `<h2>` + `<br> `;
 }
 
-for (let index = 0; index < nuevosSocios.length; index++) {
+for (let index = 0; index <= nuevosSocios.length; index++) {
     const element = nuevosSocios[index];
     
 }
