@@ -136,11 +136,12 @@ const nuevosSocios = [];
 nuevosSocios.push(new socios("Beni", 2));
 nuevosSocios.push(new socios("Oscar", 34));  
 nuevosSocios.push(new socios("Cecilia", 33));  
+nuevosSocios.push(new socios("Mila", 3));  
 
 
 for (const socio of nuevosSocios) {
     console.log(socio);
-    imprimirEnPantalla.innerHTML += `<h2>${socio.nombre} ` + ` `+ socio.anoDeNacimiento() + `<h2>` + `<br> `;
+    imprimirEnPantalla.innerHTML += `<h2>${socio.nombre} ` + ` `+ socio.edad + ` ${socio.anoDeNacimiento()}<h2>` + `<br> `;
 }
 
 for (let index = 0; index <= nuevosSocios.length; index++) {
