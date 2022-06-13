@@ -111,6 +111,9 @@ switch (plan) {
 /* let nombre = prompt ("Hola! ingresar nombre del socio")
 let edad = prompt ("¿Cuántos años tiene " + nombre + "?") */
 
+
+
+
  class socios {
     constructor (nombre, edad) {
 this.nombre = nombre;
@@ -118,7 +121,7 @@ this.edad = edad;
 this.anoActual = 2022;
     }
     anoDeNacimiento(){
-        this.anoActual - this.edad;
+       return this.anoActual - this.edad;
     }
 }
 
@@ -136,7 +139,7 @@ const nuevosSocios = [];
 nuevosSocios.push(new socios("Beni", 2));
 nuevosSocios.push(new socios("Oscar", 34));  
 nuevosSocios.push(new socios("Cecilia", 33));  
-nuevosSocios.push(new socios("Mila", 3));  
+nuevosSocios.push(new socios("Mila", 3));
 
 
 for (const socio of nuevosSocios) {
@@ -144,7 +147,20 @@ for (const socio of nuevosSocios) {
     imprimirEnPantalla.innerHTML += `<h2> Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()}<h2>` + `<br> `;
 }
 
-for (let index = 0; index <= nuevosSocios.length; index++) {
-    const element = nuevosSocios[index];
-    
+
+console.log(nuevosSocios);
+imprimirEnPantalla.innerHTML += `<h1>Hasta ahora tenemos ${nuevosSocios.length} socios </h1>`
+
+
+
+// Marian, acá quisiera agregar un for con un if dentro. Simplemente quisiera que si el año de nacimeinto es menor a 2018 lo catalogue como "menor", sino "mayor". El tema es que cree la variable categoria pero no estoy entendiendo cómo acceder a "anoDeNacimiento", probé de varias formas y...nada.
+
+let categoria = anoDeNacimiento();
+
+for (let index = 1; index <= nuevosSocios.length; index++) {
+    if (categoria < 2018) {
+        imprimirEnPantalla.innerHTML += `<h1> Socio ${index} es menor ` 
+    } else {
+        imprimirEnPantalla.innerHTML += `<h1> Socio ${index} es mayor `
+    } `</h1>`
 }
