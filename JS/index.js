@@ -141,10 +141,15 @@ nuevosSocios.push(new socios("Oscar", 34));
 nuevosSocios.push(new socios("Cecilia", 33));  
 nuevosSocios.push(new socios("Mila", 3));
 
+// número aleatorio
+function aleatorio(minimo,maximo){
+    return Math.round (Math.random() * 10000);
+  }
+
 
 for (const socio of nuevosSocios) {
     console.log(socio);
-    imprimirEnPantalla.innerHTML += `<h2> Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()}<h2>` + `<br> `;
+    imprimirEnPantalla.innerHTML += `<h2> Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ` + aleatorio`<h2> <br> `;
 }
 
 
