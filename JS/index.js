@@ -115,9 +115,10 @@ let edad = prompt ("¿Cuántos años tiene " + nombre + "?") */
 
 
  class socios {
-    constructor (nombre, edad) {
+    constructor (nombre, edad, aleatorio) {
 this.nombre = nombre;
 this.edad = edad;
+this.numeroDeSocio = aleatorio;
 this.anoActual = 2022;
     }
     anoDeNacimiento(){
@@ -136,10 +137,10 @@ console.log("Gracias por participar " + categoriaNueva.nombre); */
 
 const nuevosSocios = [];
 
-nuevosSocios.push(new socios("Beni", 2));
-nuevosSocios.push(new socios("Oscar", 34));  
-nuevosSocios.push(new socios("Cecilia", 33));  
-nuevosSocios.push(new socios("Mila", 3));
+nuevosSocios.push(new socios("Beni", 2, aleatorio()));
+nuevosSocios.push(new socios("Oscar", 34, aleatorio()));  
+nuevosSocios.push(new socios("Cecilia", 33, aleatorio()));  
+nuevosSocios.push(new socios("Mila", 3, aleatorio()));
 
 // número aleatorio
 function aleatorio(minimo,maximo){
@@ -149,7 +150,7 @@ function aleatorio(minimo,maximo){
 
 for (const socio of nuevosSocios) {
     console.log(socio);
-    imprimirEnPantalla.innerHTML += `<h2> Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ` + aleatorio`<h2> <br> `;
+    imprimirEnPantalla.innerHTML += `<h2> Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}<h2> <br> `;
 }
 
 
