@@ -159,17 +159,10 @@ imprimirEnPantalla.innerHTML += `<h1>Hasta ahora tenemos ${nuevosSocios.length} 
 
 
 
-// Marian, acá quisiera agregar un for con un if dentro. Simplemente quisiera que si el año de nacimeinto es menor a 2018 lo catalogue como "menor", sino "mayor". El tema es que cree la variable categoria pero no estoy entendiendo cómo acceder a "anoDeNacimiento", probé de varias formas y...nada.
 
-function anoDeNacimiento(){
-    return nuevosSocios.anoActual - nuevosSocios.edad;
-  }
-
-
-let categoria = anoDeNacimiento();
-
-for (let index = 1; index <= nuevosSocios.length; index++) {
-    if (categoria < 2018) {
+for (let index = 0; index <= nuevosSocios.length; index++) {
+    let categoria = nuevosSocios[index].anoDeNacimiento();
+    if (categoria > 2018) {
         imprimirEnPantalla.innerHTML += `<h1> Socio ${index} es menor ` 
     } else {
         imprimirEnPantalla.innerHTML += `<h1> Socio ${index} es mayor `
