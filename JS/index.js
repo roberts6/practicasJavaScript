@@ -143,7 +143,7 @@ nuevosSocios.push(new socios("Cecilia", 33, aleatorio()));
 nuevosSocios.push(new socios("Mila", 3, aleatorio()));
 
 // número aleatorio
-function aleatorio(minimo,maximo){
+function aleatorio(){
     return Math.round (Math.random() * 10000);
   }
 
@@ -160,6 +160,11 @@ imprimirEnPantalla.innerHTML += `<h1>Hasta ahora tenemos ${nuevosSocios.length} 
 
 
 // Marian, acá quisiera agregar un for con un if dentro. Simplemente quisiera que si el año de nacimeinto es menor a 2018 lo catalogue como "menor", sino "mayor". El tema es que cree la variable categoria pero no estoy entendiendo cómo acceder a "anoDeNacimiento", probé de varias formas y...nada.
+
+function anoDeNacimiento(){
+    return nuevosSocios.anoActual - nuevosSocios.edad;
+  }
+
 
 let categoria = anoDeNacimiento();
 
