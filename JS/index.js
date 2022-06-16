@@ -159,7 +159,7 @@ console.log(nuevosSocios);
 imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1>`
 
 
- // REVISAR --> no consigo que todos los valores estén dentro de un array, sino que me devuelve por cada valor una impresión por pantalla
+ // REVISAR --> no consigo que todos los valores estén dentro de un array, sino que me devuelve por cada valor una impresión por pantalla. Por otro lado, según entiendo, debería imprimir por pantalla la variable "menoresEdad y mayoresEdad", pero si hago eso solo me devuelve el primer valor y no todos, como si pasa cuando imprimo "menores" o "mayores"
     const menores = nuevosSocios.filter(socio => socio.edad <= 10)
     console.log(menores)
     
