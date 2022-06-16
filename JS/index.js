@@ -129,11 +129,6 @@ this.anoActual = 2022;
 
 const nuevosSocios = [];
 
-// variables que acumulen datos por input
-let nombre = document.getElementById("nombreSocio")
-let edad = document.getElementById("edadSocio")
-
-
 nuevosSocios.push(new socios("Beni", 2, aleatorio()));
 nuevosSocios.push(new socios("Oscar", 34, aleatorio()));  
 nuevosSocios.push(new socios("Cecilia", 33, aleatorio()));  
@@ -142,7 +137,7 @@ nuevosSocios.push(new socios("Malena", 18, aleatorio()));
 nuevosSocios.push(new socios("Alberto", 65, aleatorio()));
 nuevosSocios.push(new socios("Mirna", 54, aleatorio()));
 nuevosSocios.push(new socios("Sergio", 4, aleatorio()));
-nuevosSocios.push(new socios(nombre, edad, aleatorio()));
+
 
 
 // número aleatorio
@@ -154,7 +149,9 @@ function aleatorio(){
   
 for (const socio of nuevosSocios) {
     console.log(socio);
-    imprimirEnPantalla.innerHTML += `<h2>Registro: ... - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}<h2> <br> `;
+    // REVISAR --> debería retornar el índice de cada ingreso pero no, me devuelve en todos el valor 0
+    const index = nuevosSocios.indexOf(socio.nombre);
+    imprimirEnPantalla.innerHTML += `<h2>Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}<h2> <br> `;
 }
 
 
@@ -162,24 +159,21 @@ console.log(nuevosSocios);
 imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1>`
 
 
-/* 
-//nº del index en el array --> REVISAR!!
-let ordenDelRegistro = nuevosSocios.indexOf(nombre);
-console.log(ordenDelRegistro);
-*/
-
-
-/* for (let index = 0; index <= nuevosSocios.length; index++) {
-    let categoria = nuevosSocios[index].anoDeNacimiento();
-    if (categoria >= 2012) {
-        imprimirEnPantalla.innerHTML += `<h2> Socio ${index + 1} es menor </h2> ` 
-    } else {
-        imprimirEnPantalla.innerHTML += `<h2> Socio ${index + 1} es mayor </h2> `
+ // REVISAR --> no consigo que todos los valores estén dentro de un array, sino que me devuelve por cada valor una impresión por pantalla
+    const menores = nuevosSocios.filter(socio => socio.edad <= 10)
+    console.log(menores)
+    
+  for (let index = 0; index < menores.length; index++) {
+        const menoresEdad = [];
+        menoresEdad.push(new socios(menores[index].nombre))
+        imprimirEnPantalla.innerHTML += `<h2> Listado de socios menores: ${menores[index].nombre} </h2>`
     }
-} */
 
+    const mayores = nuevosSocios.filter(socio => socio.edad > 10)
+    console.log(mayores)
 
-    const menores = nuevosSocios.filter((socio) => socio.edad <= 10)
-    imprimirEnPantalla.innerHTML += `<h2> Listado de socios menores: ${menores} </h2> `
-    const mayores = nuevosSocios.filter((socio) => socio.edad > 10)
-    imprimirEnPantalla.innerHTML += `<h2> Listado de socios mayores: ${mayores} </h2> `
+    for (let index = 0; index < mayores.length; index++) {
+        const mayoresEdad = [];
+        mayoresEdad.push(new socios(mayores[index].nombre))
+        imprimirEnPantalla.innerHTML += `<h2> Listado de socios mayores: ${mayores[index].nombre} </h2>`
+    }
