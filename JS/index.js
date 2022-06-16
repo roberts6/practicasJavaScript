@@ -150,7 +150,8 @@ function aleatorio(){
 for (const socio of nuevosSocios) {
     console.log(socio);
     // REVISAR --> debería retornar el índice de cada ingreso pero no, me devuelve en todos el valor 0
-    const index = nuevosSocios.indexOf(socio.nombre);
+    // SOLUCIONADO, el problema era que estaba haciendo el indexOf de nuevosSocios
+    const index = nuevosSocios.indexOf(socio);
     imprimirEnPantalla.innerHTML += `<h2>Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}<h2> <br> `;
 }
 
