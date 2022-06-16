@@ -159,14 +159,13 @@ console.log(nuevosSocios);
 imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1>`
 
 
- // REVISAR
+ // REVISAR --> CORREGIDO
     const menores = nuevosSocios.filter(socio => socio.edad <= 10)
     console.log(menores)
     
     const menoresEdad = [];
   for (let index = 0; index < menores.length; index++) {
-        menoresEdad.push(new socios(menores[index].nombre))
-        imprimirEnPantalla.innerHTML += `<h2> ${menoresEdad[index].nombre} <strong> es menor de edad </strong> </h2>`
+        menoresEdad.push(menores[index].nombre)
     }
 
     const mayores = nuevosSocios.filter(socio => socio.edad > 10)
@@ -174,19 +173,14 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
 
     const mayoresEdad = [];
     for (let index = 0; index < mayores.length; index++) {
-        mayoresEdad.push(new socios(mayores[index].nombre))   
-        imprimirEnPantalla.innerHTML += `<h2> ${mayoresEdad[index].nombre} <strong> es mayor de edad </strong> </h2>`
+        mayoresEdad.push(mayores[index].nombre)   
     }
     
 
-
-
-    /*  de esta manera me imprime el formato, pero me devuelve Object en vez del nombre
-    
-    const mayoresEdad = [];
-    for (let index = 0; index < mayores.length; index++) {
-        mayoresEdad.push(new socios(mayores[index].nombre))   
-    }
     // Variable que contiene el array "mayoresEdad" para pasar a string 
     let listaMayores = mayoresEdad.toString(" ");
-    imprimirEnPantalla.innerHTML += `<h2> ${listaMayores} <strong> son mayores de edad </strong> </h2>` */
+    imprimirEnPantalla.innerHTML += `<h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2>` 
+
+    // Variable que contiene el array "menoresEdad" para pasar a string 
+    let listaMenores = menoresEdad.toString(" ");
+    imprimirEnPantalla.innerHTML += `<h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2>` 
