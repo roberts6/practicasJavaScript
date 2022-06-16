@@ -137,6 +137,7 @@ nuevosSocios.push(new socios("Malena", 18, aleatorio()));
 nuevosSocios.push(new socios("Alberto", 65, aleatorio()));
 nuevosSocios.push(new socios("Mirna", 54, aleatorio()));
 nuevosSocios.push(new socios("Sergio", 4, aleatorio()));
+nuevosSocios.push(new socios("Laura", 1, aleatorio()));
 
 
 
@@ -148,33 +149,44 @@ function aleatorio(){
 
   
 for (const socio of nuevosSocios) {
-    console.log(socio);
-    // REVISAR --> debería retornar el índice de cada ingreso pero no, me devuelve en todos el valor 0
-    // SOLUCIONADO, el problema era que estaba haciendo el indexOf de nuevosSocios
+    console.log(socio);    
     const index = nuevosSocios.indexOf(socio);
     imprimirEnPantalla.innerHTML += `<h2>Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}<h2> <br> `;
 }
 
-
+// contador de socios
 console.log(nuevosSocios);
 imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1>`
 
 
- // REVISAR --> no consigo que todos los valores estén dentro de un array, sino que me devuelve por cada valor una impresión por pantalla. Por otro lado, según entiendo, debería imprimir por pantalla la variable "menoresEdad y mayoresEdad", pero si hago eso solo me devuelve el primer valor y no todos, como si pasa cuando imprimo "menores" o "mayores"
+ // REVISAR
     const menores = nuevosSocios.filter(socio => socio.edad <= 10)
     console.log(menores)
     
+    const menoresEdad = [];
   for (let index = 0; index < menores.length; index++) {
-        const menoresEdad = [];
         menoresEdad.push(new socios(menores[index].nombre))
-        imprimirEnPantalla.innerHTML += `<h2> Listado de socios menores: ${menores[index].nombre} </h2>`
+        imprimirEnPantalla.innerHTML += `<h2> ${menoresEdad[index].nombre} <strong> es menor de edad </strong> </h2>`
     }
 
     const mayores = nuevosSocios.filter(socio => socio.edad > 10)
     console.log(mayores)
 
+    const mayoresEdad = [];
     for (let index = 0; index < mayores.length; index++) {
-        const mayoresEdad = [];
-        mayoresEdad.push(new socios(mayores[index].nombre))
-        imprimirEnPantalla.innerHTML += `<h2> Listado de socios mayores: ${mayores[index].nombre} </h2>`
+        mayoresEdad.push(new socios(mayores[index].nombre))   
+        imprimirEnPantalla.innerHTML += `<h2> ${mayoresEdad[index].nombre} <strong> es mayor de edad </strong> </h2>`
     }
+    
+
+
+
+    /*  de esta manera me imprime el formato, pero me devuelve Object en vez del nombre
+    
+    const mayoresEdad = [];
+    for (let index = 0; index < mayores.length; index++) {
+        mayoresEdad.push(new socios(mayores[index].nombre))   
+    }
+    // Variable que contiene el array "mayoresEdad" para pasar a string 
+    let listaMayores = mayoresEdad.toString(" ");
+    imprimirEnPantalla.innerHTML += `<h2> ${listaMayores} <strong> son mayores de edad </strong> </h2>` */
