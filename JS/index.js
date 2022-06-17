@@ -114,7 +114,7 @@ let edad = prompt ("¿Cuántos años tiene " + nombre + "?") */
 
 
 
- class socios {
+ class socio {
     constructor (nombre, edad, aleatorio) {
 this.nombre = nombre;
 this.edad = edad;
@@ -129,15 +129,16 @@ this.anoActual = 2022;
 
 const nuevosSocios = [];
 
-nuevosSocios.push(new socios("Beni", 2, aleatorio()));
-nuevosSocios.push(new socios("Oscar", 34, aleatorio()));  
-nuevosSocios.push(new socios("Cecilia", 33, aleatorio()));  
-nuevosSocios.push(new socios("Mila", 3, aleatorio()));
-nuevosSocios.push(new socios("Malena", 18, aleatorio()));
-nuevosSocios.push(new socios("Alberto", 65, aleatorio()));
-nuevosSocios.push(new socios("Mirna", 54, aleatorio()));
-nuevosSocios.push(new socios("Sergio", 4, aleatorio()));
-nuevosSocios.push(new socios("Laura", 1, aleatorio()));
+nuevosSocios.push(new socio("Beni", 2, aleatorio()));
+nuevosSocios.push(new socio("Oscar", 34, aleatorio()));  
+nuevosSocios.push(new socio("Cecilia", 33, aleatorio()));  
+nuevosSocios.push(new socio("Mila", 3, aleatorio()));
+nuevosSocios.push(new socio("Malena", 18, aleatorio()));
+nuevosSocios.push(new socio("Alberto", 65, aleatorio()));
+nuevosSocios.push(new socio("Mirna", 54, aleatorio()));
+nuevosSocios.push(new socio("Sergio", 4, aleatorio()));
+nuevosSocios.push(new socio("Laura", 1, aleatorio()));
+nuevosSocios.push(new socio("Matias", 18, aleatorio()));
 
 
 
@@ -147,9 +148,9 @@ function aleatorio(){
   }
 
 
-  
+// Muestra en pantalla los socios y sus respectivos datos 
 for (const socio of nuevosSocios) {
-    console.log(socio);    
+    /* console.log(socio); */    
     const index = nuevosSocios.indexOf(socio);
     imprimirEnPantalla.innerHTML += `<h2>Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}<h2> <br> `;
 }
@@ -159,7 +160,7 @@ console.log(nuevosSocios);
 imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1>`
 
 
- // REVISAR --> CORREGIDO
+ // Comparador para determinar si un socio es menor o mayor
     const menores = nuevosSocios.filter(socio => socio.edad <= 10)
     console.log(menores)
     
@@ -176,7 +177,6 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
         mayoresEdad.push(mayores[index].nombre)   
     }
     
-
     // Variable que contiene el array "mayoresEdad" para pasar a string 
     let listaMayores = mayoresEdad.toString(" ");
     imprimirEnPantalla.innerHTML += `<h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2>` 
@@ -184,3 +184,40 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
     // Variable que contiene el array "menoresEdad" para pasar a string 
     let listaMenores = menoresEdad.toString(" ");
     imprimirEnPantalla.innerHTML += `<h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2>` 
+
+
+
+    // INGRESO DE DATOS A TRAVÉS DEL FORMULARIO
+
+    // función formulario que recibe un callBack
+    const submitFormulario = (ID) => {
+        let form = document.getElementById(ID);
+        form.addEventListener(`submit`, (event) => {
+        event.preventDefault();
+        let nombre = form.children[0].value
+        let edad = form.children[1].value
+        let ultimoSocio = new socio(nombre, edad, aleatorio());
+        nuevoIngreso.ingresoSocio(socio);
+        console.log(ultimoSocio);
+        console.log(nuevosSocios);
+        });
+    }
+
+    submitFormulario("ingresoSocios");
+
+    // Class para guardar valor agregado --> creo que no me almacena el resultado
+    // porque el array donde debería guardar es en nuevosSocios, pero si no pongo el this.
+    // me lanza un error
+    class socios {
+        constructor (){
+            this.nuevosSocios = []
+        }
+        ingresoSocio(socio) {
+           this.nuevosSocios.push(socio);
+        } 
+    }
+
+const nuevoIngreso = new socios();
+
+const prueba = new socio("pepito", 9, aleatorio())
+console.log(prueba);
