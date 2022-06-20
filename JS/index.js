@@ -127,6 +127,7 @@ this.anoActual = 2022;
 }
 
 
+
 const nuevosSocios = [];
 
 nuevosSocios.push(new socio("Beni", 2, aleatorio()));
@@ -142,18 +143,20 @@ nuevosSocios.push(new socio("Matias", 18, aleatorio()));
 
 
 
+
 // número aleatorio
 function aleatorio(){
     return Math.round (Math.random() * 10000);
   }
 
 
+
+
 // Muestra en pantalla los socios y sus respectivos datos 
-for (const socio of nuevosSocios) {
-    /* console.log(socio); */    
+for (const socio of nuevosSocios) {  
     const index = nuevosSocios.indexOf(socio);
-    imprimirEnPantalla.innerHTML += `<h2>Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}<h2> <br> `;
-}
+    imprimirEnPantalla.innerHTML += `<div>Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
+} 
 
 // contador de socios
 console.log(nuevosSocios);
@@ -186,6 +189,7 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
     imprimirEnPantalla.innerHTML += `<h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2>` 
 
 
+    const index = nuevosSocios.indexOf(socio);
 
     // INGRESO DE DATOS A TRAVÉS DEL FORMULARIO
 
@@ -196,22 +200,42 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
         event.preventDefault();
         let nombre = form.children[0].value
         let edad = form.children[1].value
-        let ultimoSocio = new socio(nombre, edad, aleatorio());
+        let ultimoSocio = new socio(nombre,parseInt(edad), aleatorio());
         nuevosSocios.push(ultimoSocio);
         console.log(ultimoSocio);
         console.log(nuevosSocios);
-        });
+        // Muestra en pantalla los socios y sus respectivos datos 
+    imprimirEnPantalla.innerHTML += `<div class = "datosNuevoSocio"> Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
+    imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1>`
+
+    // Comparador para determinar si un socio es menor o mayor
+    const menores = nuevosSocios.filter(socio => socio.edad <= 10)
+    console.log(menores)
+    
+    const menoresEdad = [];
+  for (let index = 0; index < menores.length; index++) {
+        menoresEdad.push(menores[index].nombre)
+    }
+
+    const mayores = nuevosSocios.filter(socio => socio.edad > 10)
+    console.log(mayores)
+
+    const mayoresEdad = [];
+    for (let index = 0; index < mayores.length; index++) {
+        mayoresEdad.push(mayores[index].nombre)   
+    }
+
+    // Variable que contiene el array "mayoresEdad" para pasar a string 
+    let listaMayores = mayoresEdad.toString(" ");
+    imprimirEnPantalla.innerHTML += `<h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2>` 
+
+    // Variable que contiene el array "menoresEdad" para pasar a string 
+    let listaMenores = menoresEdad.toString(" ");
+    imprimirEnPantalla.innerHTML += `<h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2>` 
+
+}
+        );
     }
 
 
     submitFormulario("ingresoSocios");
-
-
-const prueba = new socio("pepito", 9, aleatorio())
-console.log(prueba);
-
-/* Marian, estaba pusheando cualquier cosa. Tenía que hacerlo sobre la variable que acababa de crear ("ultimoSocio"). 
- Eso ya está. Lo que vengo arrastrando es que, a pesar de que por consola funciona perfecto, no lo puedo ver reflejado
- en la impresión por pantalla. Lo que no encuentro sentido, porque si me está guardando los valores en mi array "nuevosSocios"
- debería actualizar todos los otros valores.
-*/
