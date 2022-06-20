@@ -197,27 +197,21 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
         let nombre = form.children[0].value
         let edad = form.children[1].value
         let ultimoSocio = new socio(nombre, edad, aleatorio());
-        nuevoIngreso.ingresoSocio(socio);
+        nuevosSocios.push(ultimoSocio);
         console.log(ultimoSocio);
         console.log(nuevosSocios);
         });
     }
 
+
     submitFormulario("ingresoSocios");
 
-    // Class para guardar valor agregado --> creo que no me almacena el resultado
-    // porque el array donde debería guardar es en nuevosSocios, pero si no pongo el this.
-    // me lanza un error
-    class socios {
-        constructor (){
-            this.nuevosSocios = []
-        }
-        ingresoSocio(socio) {
-           this.nuevosSocios.push(socio);
-        } 
-    }
-
-const nuevoIngreso = new socios();
 
 const prueba = new socio("pepito", 9, aleatorio())
 console.log(prueba);
+
+/* Marian, estaba pusheando cualquier cosa. Tenía que hacerlo sobre la variable que acababa de crear ("ultimoSocio"). 
+ Eso ya está. Lo que vengo arrastrando es que, a pesar de que por consola funciona perfecto, no lo puedo ver reflejado
+ en la impresión por pantalla. Lo que no encuentro sentido, porque si me está guardando los valores en mi array "nuevosSocios"
+ debería actualizar todos los otros valores.
+*/
