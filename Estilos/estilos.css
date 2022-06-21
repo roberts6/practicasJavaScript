@@ -7,9 +7,9 @@
 }
 
  .cuerpo{
-/*background-image: url(../imagenes/fondo.jpeg);
+/* background-image: url(../imagenes/fondo.jpeg);
 background-size: cover;
-background-blend-mode: lighten;*/
+background-blend-mode: lighten; */
 display: flex;
 flex-direction: column;
 align-items: center;

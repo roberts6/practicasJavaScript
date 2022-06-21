@@ -33,7 +33,7 @@ let imprimirEnPantalla = document.getElementById("imprimirEnHTML");
 let contadoresMayoresEnPantalla = document.getElementById("contadorMayores");
 let contadoresMenoresEnPantalla = document.getElementById("contadorMenores");
 let cantidadSociosEnPantalla = document.getElementById("cantidadSocios");
-let totales = document.getElementById("totales");
+let totalesEnPantalla = document.getElementById("totales");
 /*
 imprimirEnPantalla.innerHTML= `
 <h1> Hoy vienen ${amigos} amigos a tu casa y ${cocas} van a tomar Fernet </h1>
@@ -162,7 +162,7 @@ for (const socio of nuevosSocios) {
 
 // contador de socios
 console.log(nuevosSocios);
-totales.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h1> <br>`
+totalesEnPantalla.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h1> <br>`
 
 
  // Comparador para determinar si un socio es menor o mayor
@@ -204,12 +204,16 @@ totales.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h1> <br>`
         let edad = form.children[1].value
         let ultimoSocio = new socio(nombre,parseInt(edad), aleatorio());
         nuevosSocios.push(ultimoSocio);
+        let index = nuevosSocios.indexOf(ultimoSocio);
+        console.log(index);
+        
         console.log(ultimoSocio);
         console.log(nuevosSocios);
 
        
         // Muestra en pantalla los socios y sus respectivos datos 
-        cantidadSocios.innerHTML += `<div class = "datosNuevoSocio"> Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
+            const indexNuevo = nuevosSocios.indexOf(ultimoSocio);
+        cantidadSocios.innerHTML += `<div class = "datosNuevoSocio"> Registro: ${indexNuevo + 1} - Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
 
     // Comparador para determinar si un socio es menor o mayor
     const menores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad <= 10)
@@ -224,7 +228,7 @@ totales.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h1> <br>`
     console.log(mayores)
 
     // Contador de cantidad de socios
-totales.innerHTML = `<div> <h1>Cantidad de socios: ${nuevosSocios.length}</h1> </div>`
+totalesEnPantalla.innerHTML = `<div> <h1>Cantidad de socios: ${nuevosSocios.length}</h1> </div>`
 console.log('socios totales',nuevosSocios)
 const mayoresEdad = [];
     for (let index = 0; index < mayores.length; index++) {
