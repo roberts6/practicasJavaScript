@@ -30,7 +30,8 @@ alert("Hoy te vas a encontrar $ " + pesos )
 
 //imprimir en el HTML // se usan comillas simples invertidas */
 let imprimirEnPantalla = document.getElementById("imprimirEnHTML");
-
+let contadoresEnPantalla = document.getElementById("contadores");
+let cantidadSociosEnPantalla = document.getElementById("cantidadSocios");
 /*
 imprimirEnPantalla.innerHTML= `
 <h1> Hoy vienen ${amigos} amigos a tu casa y ${cocas} van a tomar Fernet </h1>
@@ -111,7 +112,7 @@ switch (plan) {
 /* let nombre = prompt ("Hola! ingresar nombre del socio")
 let edad = prompt ("¿Cuántos años tiene " + nombre + "?") */
 
-
+const ano = new Date();
 
 
  class socio {
@@ -119,7 +120,7 @@ let edad = prompt ("¿Cuántos años tiene " + nombre + "?") */
 this.nombre = nombre;
 this.edad = edad;
 this.numeroDeSocio = aleatorio;
-this.anoActual = 2022;
+this.anoActual = ano.getFullYear();
     }
     anoDeNacimiento(){
        return this.anoActual - this.edad;
@@ -151,7 +152,6 @@ function aleatorio(){
 
 
 
-
 // Muestra en pantalla los socios y sus respectivos datos 
 for (const socio of nuevosSocios) {  
     const index = nuevosSocios.indexOf(socio);
@@ -160,7 +160,7 @@ for (const socio of nuevosSocios) {
 
 // contador de socios
 console.log(nuevosSocios);
-imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1>`
+imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1> <br>`
 
 
  // Comparador para determinar si un socio es menor o mayor
@@ -201,12 +201,17 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
         let nombre = form.children[0].value
         let edad = form.children[1].value
         let ultimoSocio = new socio(nombre,parseInt(edad), aleatorio());
-        nuevosSocios.push(ultimoSocio);
+        nuevosSocios.splice(0,0,ultimoSocio);
         console.log(ultimoSocio);
         console.log(nuevosSocios);
+
+       
         // Muestra en pantalla los socios y sus respectivos datos 
     imprimirEnPantalla.innerHTML += `<div class = "datosNuevoSocio"> Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
-    imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1>`
+
+    // Contador de cantidad de socios
+    cantidadSociosEnPantalla.innerHTML += `<div> <h1>Cantidad de socios: ${nuevosSocios.length}</h1> </div>` 
+
 
     // Comparador para determinar si un socio es menor o mayor
     const menores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad <= 10)
@@ -214,7 +219,7 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
     
     const menoresEdad = [];
   for (let index = 0; index < menores.length; index++) {
-        menoresEdad.push(menores[index].nombre)
+        menoresEdad.splice(0,0,menores[index].nombre)
     }
 
     const mayores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad > 10)
@@ -222,16 +227,16 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
 
     const mayoresEdad = [];
     for (let index = 0; index < mayores.length; index++) {
-        mayoresEdad.push(mayores[index].nombre)   
+        mayoresEdad.push(mayores[index].nombre)  
     }
 
     // Variable que contiene el array "mayoresEdad" para pasar a string 
     let listaMayores = mayoresEdad.toString(" ");
-    imprimirEnPantalla.innerHTML += `<h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2>` 
+    contadoresEnPantalla.innerHTML += `<div> <h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2> </div> <br>` 
 
     // Variable que contiene el array "menoresEdad" para pasar a string 
     let listaMenores = menoresEdad.toString(" ");
-    imprimirEnPantalla.innerHTML += `<h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2>` 
+    contadoresEnPantalla.innerHTML += `<div> <h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2> </div>` 
 
 }
         );
