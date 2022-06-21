@@ -30,8 +30,10 @@ alert("Hoy te vas a encontrar $ " + pesos )
 
 //imprimir en el HTML // se usan comillas simples invertidas */
 let imprimirEnPantalla = document.getElementById("imprimirEnHTML");
-let contadoresEnPantalla = document.getElementById("contadores");
+let contadoresMayoresEnPantalla = document.getElementById("contadorMayores");
+let contadoresMenoresEnPantalla = document.getElementById("contadorMenores");
 let cantidadSociosEnPantalla = document.getElementById("cantidadSocios");
+let totales = document.getElementById("totales");
 /*
 imprimirEnPantalla.innerHTML= `
 <h1> Hoy vienen ${amigos} amigos a tu casa y ${cocas} van a tomar Fernet </h1>
@@ -155,12 +157,12 @@ function aleatorio(){
 // Muestra en pantalla los socios y sus respectivos datos 
 for (const socio of nuevosSocios) {  
     const index = nuevosSocios.indexOf(socio);
-    imprimirEnPantalla.innerHTML += `<div>Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
+    cantidadSocios.innerHTML += `<div>Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
 } 
 
 // contador de socios
 console.log(nuevosSocios);
-imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1> <br>`
+totales.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h1> <br>`
 
 
  // Comparador para determinar si un socio es menor o mayor
@@ -182,11 +184,11 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
     
     // Variable que contiene el array "mayoresEdad" para pasar a string 
     let listaMayores = mayoresEdad.toString(" ");
-    imprimirEnPantalla.innerHTML += `<h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2>` 
+    contadoresMayoresEnPantalla.innerHTML += `<h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2>` 
 
     // Variable que contiene el array "menoresEdad" para pasar a string 
     let listaMenores = menoresEdad.toString(" ");
-    imprimirEnPantalla.innerHTML += `<h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2>` 
+    contadoresMenoresEnPantalla.innerHTML += `<h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2>` 
 
 
     const index = nuevosSocios.indexOf(socio);
@@ -201,17 +203,13 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
         let nombre = form.children[0].value
         let edad = form.children[1].value
         let ultimoSocio = new socio(nombre,parseInt(edad), aleatorio());
-        nuevosSocios.splice(0,0,ultimoSocio);
+        nuevosSocios.push(ultimoSocio);
         console.log(ultimoSocio);
         console.log(nuevosSocios);
 
        
         // Muestra en pantalla los socios y sus respectivos datos 
-    imprimirEnPantalla.innerHTML += `<div class = "datosNuevoSocio"> Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
-
-    // Contador de cantidad de socios
-    cantidadSociosEnPantalla.innerHTML += `<div> <h1>Cantidad de socios: ${nuevosSocios.length}</h1> </div>` 
-
+        cantidadSocios.innerHTML += `<div class = "datosNuevoSocio"> Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
 
     // Comparador para determinar si un socio es menor o mayor
     const menores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad <= 10)
@@ -219,24 +217,27 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
     
     const menoresEdad = [];
   for (let index = 0; index < menores.length; index++) {
-        menoresEdad.splice(0,0,menores[index].nombre)
+        menoresEdad.push(menores[index].nombre)
     }
 
     const mayores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad > 10)
     console.log(mayores)
 
-    const mayoresEdad = [];
+    // Contador de cantidad de socios
+totales.innerHTML = `<div> <h1>Cantidad de socios: ${nuevosSocios.length}</h1> </div>`
+console.log('socios totales',nuevosSocios)
+const mayoresEdad = [];
     for (let index = 0; index < mayores.length; index++) {
         mayoresEdad.push(mayores[index].nombre)  
     }
 
     // Variable que contiene el array "mayoresEdad" para pasar a string 
     let listaMayores = mayoresEdad.toString(" ");
-    contadoresEnPantalla.innerHTML += `<div> <h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2> </div> <br>` 
+    contadoresMayoresEnPantalla.innerHTML = `<div> <h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2> </div> <br>` 
 
     // Variable que contiene el array "menoresEdad" para pasar a string 
     let listaMenores = menoresEdad.toString(" ");
-    contadoresEnPantalla.innerHTML += `<div> <h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2> </div>` 
+    contadoresMenoresEnPantalla.innerHTML = `<div> <h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2> </div>` 
 
 }
         );
@@ -246,9 +247,4 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
     submitFormulario("ingresoSocios");
 
 
-    /* Perdón Marian, pero estoy un poco trabado. No le encuentro la vuelta. EL formulario funciona, pero los contadores que puse para determinar cantidad de socios y cantidad de menores/mayores se repite en vez de actualizarse. 
-    Lo otro que me pasa esq ue de esta manera siento que está bastante desprolijo el código
-
-
-    Por otro lado copié la clase que dio el otro día el profe y traté de replicarla para ver si quedaba más prolija, pero me da un error y no me deja agregar nuevos socios. 
-    */
+    
