@@ -209,7 +209,7 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
     imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}</h1>`
 
     // Comparador para determinar si un socio es menor o mayor
-    const menores = nuevosSocios.filter(socio => socio.edad <= 10)
+    const menores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad <= 10)
     console.log(menores)
     
     const menoresEdad = [];
@@ -217,7 +217,7 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
         menoresEdad.push(menores[index].nombre)
     }
 
-    const mayores = nuevosSocios.filter(socio => socio.edad > 10)
+    const mayores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad > 10)
     console.log(mayores)
 
     const mayoresEdad = [];
@@ -239,3 +239,11 @@ imprimirEnPantalla.innerHTML += `<h1>Cantidad de socios: ${nuevosSocios.length}<
 
 
     submitFormulario("ingresoSocios");
+
+
+    /* Perdón Marian, pero estoy un poco trabado. No le encuentro la vuelta. EL formulario funciona, pero los contadores que puse para determinar cantidad de socios y cantidad de menores/mayores se repite en vez de actualizarse. 
+    Lo otro que me pasa esq ue de esta manera siento que está bastante desprolijo el código
+
+
+    Por otro lado copié la clase que dio el otro día el profe y traté de replicarla para ver si quedaba más prolija, pero me da un error y no me deja agregar nuevos socios. 
+    */
