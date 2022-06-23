@@ -157,7 +157,7 @@ function aleatorio(){
 // Muestra en pantalla los socios y sus respectivos datos 
 for (const socio of nuevosSocios) {  
     const index = nuevosSocios.indexOf(socio);
-    cantidadSocios.innerHTML += `<div>Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
+    cantidadSocios.innerHTML += `<div> <button id="borrarSocio">Borrar</button> Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
 } 
 
 // contador de socios
@@ -204,7 +204,6 @@ totalesEnPantalla.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h
         let edad = form.children[1].value
         let ultimoSocio = new socio(nombre,parseInt(edad), aleatorio());
         nuevosSocios.push(ultimoSocio);
-        let index = nuevosSocios.indexOf(ultimoSocio);
         console.log(index);
         
         console.log(ultimoSocio);
@@ -212,8 +211,8 @@ totalesEnPantalla.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h
 
        
         // Muestra en pantalla los socios y sus respectivos datos 
-            const indexNuevo = nuevosSocios.indexOf(ultimoSocio);
-        cantidadSocios.innerHTML += `<div class = "datosNuevoSocio"> Registro: ${indexNuevo + 1} - Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
+        const indexNuevo = nuevosSocios.indexOf(socio);
+        cantidadSocios.innerHTML += `<div class = "datosNuevoSocio"> <button id="borrarSocio">Borrar</button> Registro: ${indexNuevo + 1} - Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
 
     // Comparador para determinar si un socio es menor o mayor
     const menores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad <= 10)
@@ -243,9 +242,17 @@ const mayoresEdad = [];
     let listaMenores = menoresEdad.toString(" ");
     contadoresMenoresEnPantalla.innerHTML = `<div> <h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2> </div>` 
 
-}
-        );
+
+    // Botón para eliminar socios --> REVISAR
+  
+    let borrar = document.getElementById("borrarSocio")
+    borrar.onclick = () => {
+        nuevosSocios.filter((indexNuevo) => indexNuevo === ultimoSocio)
+        console.log(borrarSocio);
     }
+    
+    }
+        )}
 
 
     submitFormulario("ingresoSocios");

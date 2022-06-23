@@ -105,3 +105,23 @@ const submitFormulario = (ID) => {
     })
 }
 submitFormulario('formulario')
+
+
+
+
+
+
+
+// Botón para eliminar socios
+const borrarSocio = (socio) => {
+    nuevosSocios = nuevosSocios.filter((value) => {
+        return value.nombre !== socio.nombre
+}
+
+
+const boton = document.createElement('button')
+        boton.textContent = "Eliminar"
+        boton.onclick = () => {
+        this.borrarSocio(socio)
+        this.borrarSocioHtml(socio)
+}
