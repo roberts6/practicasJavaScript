@@ -254,6 +254,17 @@ const mayoresEdad = [];
     }
         )}
 
+//opción 2 para borrar
+function borrarEntrada(nuevosSocios, item) {
+    for (let i = nuevosSocios.length; i--;) {
+        if (nuevosSocios[i] === item) {
+            nuevosSocios.splice(i, 1);
+        }
+    }
+}
+
+borrarEntrada();
+
 
     submitFormulario("ingresoSocios");
 
