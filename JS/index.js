@@ -117,6 +117,7 @@ let edad = prompt ("¿Cuántos años tiene " + nombre + "?") */
 const ano = new Date();
 
 
+
  class socio {
     constructor (nombre, edad, aleatorio) {
 this.nombre = nombre;
@@ -144,7 +145,7 @@ nuevosSocios.push(new socio("Sergio", 4, aleatorio()));
 nuevosSocios.push(new socio("Laura", 1, aleatorio()));
 nuevosSocios.push(new socio("Matias", 18, aleatorio()));
 
-
+const index = nuevosSocios.indexOf(socio)
 
 
 // número aleatorio
@@ -152,12 +153,20 @@ function aleatorio(){
     return Math.round (Math.random() * 10000);
   }
 
+const indiceSocios = () => {
+    for (const socio of nuevosSocios) {
+       return nuevosSocios.indexOf(socio) + 1
+    }
+}
+
+console.log(indiceSocios());
+ 
 
 
 // Muestra en pantalla los socios y sus respectivos datos 
 for (const socio of nuevosSocios) {  
-    const index = nuevosSocios.indexOf(socio);
-    cantidadSocios.innerHTML += `<div> <button id="borrarSocio">Borrar</button> Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
+    
+    cantidadSocios.innerHTML += `<div> <button class="borrarSocio">Borrar</button> Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
 } 
 
 // contador de socios
@@ -191,7 +200,6 @@ totalesEnPantalla.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h
     contadoresMenoresEnPantalla.innerHTML += `<h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2>` 
 
 
-    const index = nuevosSocios.indexOf(socio);
 
     // INGRESO DE DATOS A TRAVÉS DEL FORMULARIO
 
@@ -204,15 +212,14 @@ totalesEnPantalla.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h
         let edad = form.children[1].value
         let ultimoSocio = new socio(nombre,parseInt(edad), aleatorio());
         nuevosSocios.push(ultimoSocio);
-        console.log(index);
-        
-        console.log(ultimoSocio);
+       
+        console.log("index del último socio agregado:", nuevosSocios.indexOf(ultimoSocio));
         console.log(nuevosSocios);
+        indiceSocios()
 
        
         // Muestra en pantalla los socios y sus respectivos datos 
-        const indexNuevo = nuevosSocios.indexOf(socio);
-        cantidadSocios.innerHTML += `<div class = "datosNuevoSocio"> <button id="borrarSocio">Borrar</button> Registro: ${indexNuevo + 1} - Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
+        cantidadSocios.innerHTML += `<div class = "datosNuevoSocio"> <button class="borrarSocio">Borrar</button> Registro: ${nuevosSocios.indexOf(ultimoSocio)+ 1} - Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
 
     // Comparador para determinar si un socio es menor o mayor
     const menores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad <= 10)
@@ -244,29 +251,28 @@ const mayoresEdad = [];
 
 
     // Botón para eliminar socios --> REVISAR
-  
-    let borrar = document.getElementById("borrarSocio")
-    borrar.onclick = () => {
-        nuevosSocios.filter((indexNuevo) => indexNuevo === ultimoSocio)
-        console.log(borrarSocio);
+
+let borrar = document.getElementsByClassName("borrarSocio")
+
+for (let i = 0; i <= nuevosSocios.length-1; i++) {
+
+borrar[i].onclick = () => {
+
+let indice= nuevosSocios.findIndex((el) => el[i] == nuevosSocios.indexOf([i]))
+
+nuevosSocios.splice(indice, 1)
+
+nuevosSocios.map((el) => {
+
+cantidadSocios.innerHTML = `
+
+Borrar Nombre: ${el.nombre} /  Edad: ${el.edad} / Año nacimiento: ${el.anoDeNacimiento()} / Número de socio ${el.numeroDeSocio}`
+
+})
+
     }
-    
-    }
-        )}
-
-//opción 2 para borrar
-function borrarEntrada(nuevosSocios, item) {
-    for (let i = nuevosSocios.length; i--;) {
-        if (nuevosSocios[i] === item) {
-            nuevosSocios.splice(i, 1);
-        }
-    }
-}
-
-borrarEntrada();
+}})}
 
 
-    submitFormulario("ingresoSocios");
-
-
+    submitFormulario("ingresoSocios")
     
