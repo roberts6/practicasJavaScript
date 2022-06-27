@@ -128,7 +128,11 @@ this.anoActual = ano.getFullYear();
     anoDeNacimiento(){
        return this.anoActual - this.edad;
     }
+    SocioID (){
+        return this.numeroDeSocio * 2;
+    }
 }
+
 
 
 
@@ -145,28 +149,17 @@ nuevosSocios.push(new socio("Sergio", 4, aleatorio()));
 nuevosSocios.push(new socio("Laura", 1, aleatorio()));
 nuevosSocios.push(new socio("Matias", 18, aleatorio()));
 
-const index = nuevosSocios.indexOf(socio)
-
 
 // número aleatorio
 function aleatorio(){
     return Math.round (Math.random() * 10000);
   }
 
-const indiceSocios = () => {
-    for (const socio of nuevosSocios) {
-       return nuevosSocios.indexOf(socio) + 1
-    }
-}
-
-console.log(indiceSocios());
- 
 
 
 // Muestra en pantalla los socios y sus respectivos datos 
 for (const socio of nuevosSocios) {  
-    
-    cantidadSocios.innerHTML += `<div> <button class="borrarSocio">Borrar</button> Registro: ${index + 1} - Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
+    cantidadSocios.innerHTML += `<div> <button class="borrarSocio">Borrar</button> Registro: ${nuevosSocios.indexOf(socio) + 1} -ID ${socio.SocioID()} -  Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
 } 
 
 // contador de socios
@@ -254,21 +247,23 @@ const mayoresEdad = [];
 
 let borrar = document.getElementsByClassName("borrarSocio")
 
-for (let i = 0; i <= nuevosSocios.length-1; i++) {
+for (let i = 0; i <= nuevosSocios.length; i++) {
 
 borrar[i].onclick = () => {
 
-let indice= nuevosSocios.findIndex((el) => el[i] == nuevosSocios.indexOf([i]))
+const filtro = nuevosSocios.filter((valor) => {return valor != valor.numeroDeSocio});
+console.log(filtro);
 
-nuevosSocios.splice(indice, 1)
 
-nuevosSocios.map((el) => {
+//nuevosSocios.splice(filtro, 1)
 
-cantidadSocios.innerHTML = `
+//nuevosSocios.map((el) => {
 
-Borrar Nombre: ${el.nombre} /  Edad: ${el.edad} / Año nacimiento: ${el.anoDeNacimiento()} / Número de socio ${el.numeroDeSocio}`
+//cantidadSocios.innerHTML = `
 
-})
+//Borrar Nombre: ${el.nombre} /  Edad: ${el.edad} / Año nacimiento: ${el.anoDeNacimiento()} / Número de socio ${el.numeroDeSocio}`
+
+//})
 
     }
 }})}
