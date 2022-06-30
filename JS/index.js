@@ -53,8 +53,10 @@ class Socios{
             elememto.id = socio.numeroDeSocio
             elememto.className = "socio"
             elememto.innerHTML = `
-            <div class= "nombreSocio">${socio.nombre}</div>
-            <div class= "edadSocio">${socio.edad}</div>
+            <div class= "nombreSocio">Nombre: ${socio.nombre}</div>
+            <div class= "edadSocio">Edad: ${socio.edad}</div>
+            <div class= "edadSocio">Año de nacimiento: ${socio.anoDeNacimiento()}</div>
+            <div class= "edadSocio">Nº de socio: ${socio.numeroDeSocio}</div>
             `
             // creo botón para borrar
             const botonBorrar = document.createElement("button")
@@ -77,8 +79,10 @@ class Socios{
             elememto.id = socio?.numeroDeSocio
             elememto.className = "socio"
             elememto.innerHTML = `
-            <div class= "nombreSocio">${socio?.nombre}</div>
-            <div class= "edadSocio">${socio?.edad}</div>
+            <div class= "nombreSocio">Nombre: ${socio?.nombre}</div>
+            <div class= "edadSocio">Edad: ${socio?.edad}</div>
+            <div class= "edadSocio">Año de nacimiento: ${socio?.anoDeNacimiento()}</div>
+            <div class= "edadSocio">Nº de socio: ${socio?.numeroDeSocio}</div>
             `
             const botonBorrar = document.createElement("button")
             botonBorrar.textContent = "Borrar"
