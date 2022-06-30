@@ -1,128 +1,11 @@
-/*  //prompt + alert
-let milanesa = prompt("Milanesa de pollo o carne?")
-let acompanamiento = prompt("con pure o con ensalada?")
-alert("Te invito a comer milanesa de " + milanesa + " con " + acompanamiento + ". Pero la cerveza la pagás vos")*/
-
-/* switch (milanesa) {
-    case "carne":
-            alert("Te invito a comer milanesa de " + milanesa)
-        break;
-        case "pollo":
-                alert("Te invito a comer milanesa de " + milanesa)
-        break;
-
-    default:
-            alert("Falta de respeto. Eso no se puede llamar milanesa ")
-        break;
-}
-
-let amigos = prompt("Con cuántos/as amigos/as te vas a juntar el finde?")
-let cocas = prompt("Cuántos/as toman fernet?")
-let cantidadCocas = cocas * 2
-alert("Si son " + amigos + " vas a tener que comprar " + cantidadCocas + " cocas porque se van a quedar cortos/as sino")
-
-
-//multiplicación
-let anos = prompt("Cuántos años tenés?")
-let numeroFav = prompt("Tu número favorito del 1 al 10")
-let pesos = (anos * numeroFav) / 3
-alert("Hoy te vas a encontrar $ " + pesos )
-
-//imprimir en el HTML // se usan comillas simples invertidas */
-let imprimirEnPantalla = document.getElementById("imprimirEnHTML");
-let contadoresMayoresEnPantalla = document.getElementById("contadorMayores");
-let contadoresMenoresEnPantalla = document.getElementById("contadorMenores");
-let cantidadSociosEnPantalla = document.getElementById("cantidadSocios");
-let totalesEnPantalla = document.getElementById("totales");
-/*
-imprimirEnPantalla.innerHTML= `
-<h1> Hoy vienen ${amigos} amigos a tu casa y ${cocas} van a tomar Fernet </h1>
-<h3> Así que por favor no te olvides las ${cantidadCocas} cocas. Sino las milanesas de ${milanesa} les quedan atoradas</h3>
-`;
-
-//condicional --> el + antes del = concatena con el mensaje anterior
-if (amigos >= 6){
-    imprimirEnPantalla.innerHTML += `<h3> uufff ` + amigos + ` ...Son muchos. Linda juntada. </h3>`;
-}else {
-    imprimirEnPantalla.innerHTML += `<h3> Algo íntimo, me gusta </h3>`;
-}
-
-// Ciclo
-for(let i = 1; i <= amigos; i++ ){
-    imprimirEnPantalla.innerHTML += ` El amigo` + ` ` + i + ` `;
-}
-
-
-//switch
-switch (amigos % 2) {
-    case 0:
-        imprimirEnPantalla.innerHTML += ` <h2> Si son ` + amigos + ` da para jugar al truco en parejas. Pueden armar ` + (amigos)/2 +  ` equipos. </h2>`
-        break;
-
-    default:
-            imprimirEnPantalla.innerHTML += `<h2> Si son ${amigos} les falta 1 para el truco <h2>`
-        break;
-}
-
-//calculadora
-for (let i = 1; i <=10 ; i++){
-for (let y = 1; y <=10; y++) {
-    imprimirEnPantalla.innerHTML += ` <h1> Calculadora. Tabla del ${i} </h1>
-    <h2> ${i} X ${y} = ${i * y} <h2>`
-}
-}
-
-
-
-
-let copasInternacionales = 22
-let copasNacionales = 16 
-let torneosLocales = 34
-
-let torneosBoca = copasInternacionales + copasNacionales + torneosLocales
-
-console.log ("Boca tiene " + torneosBoca + " trofeos entre copas y torneos") */
-
-
-/* let plan = prompt ("El plan médico que necesitás es individual o es familiar?")
-
-const familia = prompt("Cuántos son en la familia? (incluyéndote)")
-
-const individual = prompt ("")
-
-class cliente {
- constructor(nombreCompleto, edad){
- this.nombreCompleto = nombreCompleto;
- this.edad = edad;
-}
-}
-
-switch (plan) {
-    case individual:
-        imprimirEnPantalla.innerHTML += ` <h2> El plan que mejor se adapta a tus necesidades tiene un valor de $500 final. </h2>` 
-        break;
-
-    case familiar:
-        imprimirEnPantalla.innerHTML += ` <h2> Si son ` + familia + ` sería mejor este plan. El valor es de $ ` + (familia)*405,6 +  ` total. </h2>`
-        break;
-
-    default:
-            imprimirEnPantalla.innerHTML += `<h2> No existe el plan que estás buscando <h2>`
-        break;
-} */
-
-/* let nombre = prompt ("Hola! ingresar nombre del socio")
-let edad = prompt ("¿Cuántos años tiene " + nombre + "?") */
-
 const ano = new Date();
 
-
-
- class socio {
-    constructor (nombre, edad, aleatorio) {
+// clase que construye socio con su información
+class Socio {
+    constructor (nombre, edad) {
 this.nombre = nombre;
 this.edad = edad;
-this.numeroDeSocio = aleatorio;
+this.numeroDeSocio = Math.round (Math.random() * 10000);;
 this.anoActual = ano.getFullYear();
     }
     anoDeNacimiento(){
@@ -134,140 +17,128 @@ this.anoActual = ano.getFullYear();
 }
 
 
+// clase que ejecuta acciones sobre el socio
+class Socios{
+    constructor(){
+        this.listaNuevosSocios = []
+    }
+    agregarSocio(socio){
+        this.listaNuevosSocios.push(socio)
+    }
+    borrarSocio (socio){
+        this.listaNuevosSocios = this.listaNuevosSocios.filter((value) => {
+            return value.numeroDeSocio !== socio.numeroDeSocio
+        })
+    }
+    borrarSocioHTML(socio){
+        let elememto = document.getElementById(socio.numeroDeSocio)
+        elememto.remove()
+    }
+    generadorID(){
+        (this.listaNuevosSocios.length) + 1
+    }
+    LogArray(){
+        console.log(this.listaNuevosSocios);
+        
+    }
+    mostrarEnHTML(){
+        // primero obtengo el contenedor donde quiero imprimir
+        let contenedor = document.getElementById("contenedor")
+        for (let index = 0; index < this.listaNuevosSocios.length; index++) {
+            // itera cada socio dentro de mi array
+            const socio = this.listaNuevosSocios[index];
+            // crea un div por cada elemento
+            const elememto = document.createElement("div")
+            // le voy a asignar un id y una clase a cada socio. Como valor va a tomar su numero de socio
+            elememto.id = socio.numeroDeSocio
+            elememto.className = "socio"
+            elememto.innerHTML = `
+            <div class= "nombreSocio">${socio.nombre}</div>
+            <div class= "edadSocio">${socio.edad}</div>
+            `
+            // creo botón para borrar
+            const botonBorrar = document.createElement("button")
+            botonBorrar.textContent = "Borrar"
+            // acción del botón
+            botonBorrar.onclick = () => {
+                this.borrarSocio(socio)
+                this.borrarSocioHTML(socio)
+                this.LogArray()
+            }
+            // agrego el botón creado a mi elemento
+            elememto.append(botonBorrar)
+            // agrego el elemento creado a mi contenedor
+            contenedor.append(elememto)
+        }
+    }
+    mostrarUltimoSocio (socio){
+        let contenedor = document.getElementById("contenedor")
+            const elememto = document.createElement("div")
+            elememto.id = socio.numeroDeSocio
+            elememto.className = "socio"
+            elememto.innerHTML = `
+            <div class= "nombreSocio">${socio.nombre}</div>
+            <div class= "edadSocio">${socio.edad}</div>
+            `
+            const botonBorrar = document.createElement("button")
+            botonBorrar.textContent = "Borrar"
 
-
-const nuevosSocios = [];
-
-nuevosSocios.push(new socio("Beni", 2, aleatorio()));
-nuevosSocios.push(new socio("Oscar", 34, aleatorio()));  
-nuevosSocios.push(new socio("Cecilia", 33, aleatorio()));  
-nuevosSocios.push(new socio("Mila", 3, aleatorio()));
-nuevosSocios.push(new socio("Malena", 18, aleatorio()));
-nuevosSocios.push(new socio("Alberto", 65, aleatorio()));
-nuevosSocios.push(new socio("Mirna", 54, aleatorio()));
-nuevosSocios.push(new socio("Sergio", 4, aleatorio()));
-nuevosSocios.push(new socio("Laura", 1, aleatorio()));
-nuevosSocios.push(new socio("Matias", 18, aleatorio()));
-
-
-// número aleatorio
-function aleatorio(){
-    return Math.round (Math.random() * 10000);
-  }
-
-
-
-// Muestra en pantalla los socios y sus respectivos datos 
-for (const socio of nuevosSocios) {  
-    cantidadSocios.innerHTML += `<div> <button class="borrarSocio">Borrar</button> Registro: ${nuevosSocios.indexOf(socio) + 1} -ID ${socio.SocioID()} -  Nombre: ${socio.nombre} / ` + ` Edad: `+ socio.edad + ` / Año nacimiento: ${socio.anoDeNacimiento()} / Número de socio ${socio.numeroDeSocio}</div> <br> `;
-} 
-
-// contador de socios
-console.log(nuevosSocios);
-totalesEnPantalla.innerHTML = `<h1>Cantidad de socios: ${nuevosSocios.length}</h1> <br>`
-
-
- // Comparador para determinar si un socio es menor o mayor
-    const menores = nuevosSocios.filter(socio => socio.edad <= 10)
-    console.log(menores)
-    
-    const menoresEdad = [];
-  for (let index = 0; index < menores.length; index++) {
-        menoresEdad.push(menores[index].nombre)
+            botonBorrar.onclick = () => {
+                this.borrarSocio(socio)
+                this.borrarSocioHTML(socio)
+                this.LogArray()
+            }
+         
+            elememto.append(botonBorrar)
+            contenedor.append(elememto)
     }
 
-    const mayores = nuevosSocios.filter(socio => socio.edad > 10)
-    console.log(mayores)
-
-    const mayoresEdad = [];
-    for (let index = 0; index < mayores.length; index++) {
-        mayoresEdad.push(mayores[index].nombre)   
-    }
-    
-    // Variable que contiene el array "mayoresEdad" para pasar a string 
-    let listaMayores = mayoresEdad.toString(" ");
-    contadoresMayoresEnPantalla.innerHTML += `<h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2>` 
-
-    // Variable que contiene el array "menoresEdad" para pasar a string 
-    let listaMenores = menoresEdad.toString(" ");
-    contadoresMenoresEnPantalla.innerHTML += `<h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2>` 
+}
 
 
-
-    // INGRESO DE DATOS A TRAVÉS DEL FORMULARIO
-
-    // función formulario que recibe un callBack
-    const submitFormulario = (ID) => {
-        let form = document.getElementById(ID);
-        form.addEventListener(`submit`, (event) => {
-        event.preventDefault();
-        let nombre = form.children[0].value
-        let edad = form.children[1].value
-        let ultimoSocio = new socio(nombre,parseInt(edad), aleatorio());
-        nuevosSocios.push(ultimoSocio);
-       
-        console.log("index del último socio agregado:", nuevosSocios.indexOf(ultimoSocio));
-        console.log(nuevosSocios);
-        indiceSocios()
-
-       
-        // Muestra en pantalla los socios y sus respectivos datos 
-        cantidadSocios.innerHTML += `<div class = "datosNuevoSocio"> <button class="borrarSocio">Borrar</button> Registro: ${nuevosSocios.indexOf(ultimoSocio)+ 1} - Nombre: ${ultimoSocio.nombre} / ` + ` Edad: `+ ultimoSocio.edad + ` / Año nacimiento: ${ultimoSocio.anoDeNacimiento()} / Número de socio ${ultimoSocio.numeroDeSocio}</div> <br> `;
-
-    // Comparador para determinar si un socio es menor o mayor
-    const menores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad <= 10)
-    console.log(menores)
-    
-    const menoresEdad = [];
-  for (let index = 0; index < menores.length; index++) {
-        menoresEdad.push(menores[index].nombre)
-    }
-
-    const mayores = nuevosSocios.filter(ultimoSocio => ultimoSocio.edad > 10)
-    console.log(mayores)
-
-    // Contador de cantidad de socios
-totalesEnPantalla.innerHTML = `<div> <h1>Cantidad de socios: ${nuevosSocios.length}</h1> </div>`
-console.log('socios totales',nuevosSocios)
-const mayoresEdad = [];
-    for (let index = 0; index < mayores.length; index++) {
-        mayoresEdad.push(mayores[index].nombre)  
-    }
-
-    // Variable que contiene el array "mayoresEdad" para pasar a string 
-    let listaMayores = mayoresEdad.toString(" ");
-    contadoresMayoresEnPantalla.innerHTML = `<div> <h2> ${listaMayores} <strong> son mayores de edad </strong> . En total son ${mayoresEdad.length}</h2> </div> <br>` 
-
-    // Variable que contiene el array "menoresEdad" para pasar a string 
-    let listaMenores = menoresEdad.toString(" ");
-    contadoresMenoresEnPantalla.innerHTML = `<div> <h2> ${listaMenores} <strong> son menores de edad </strong> . En total son ${menoresEdad.length} </h2> </div>` 
+// inicia el array "nuevosSocios" en 0
+const SOCIOS = new Socios()
 
 
-    // Botón para eliminar socios --> REVISAR
-
-let borrar = document.getElementsByClassName("borrarSocio")
-
-for (let i = 0; i <= nuevosSocios.length; i++) {
-
-borrar[i].onclick = () => {
-
-const filtro = nuevosSocios.filter((valor) => {return valor != valor.numeroDeSocio});
-console.log(filtro);
+// Ingreso de socios de forma estática
+const socioEstatico1 = new Socio("Beni", 2);
+const socioEstatico2 = new Socio("Oscar", 34);  
+const socioEstatico3 = new Socio("Cecilia", 33);  
+const socioEstatico4 = new Socio("Mila", 3);
 
 
-//nuevosSocios.splice(filtro, 1)
+SOCIOS.agregarSocio(socioEstatico1)
+SOCIOS.agregarSocio(socioEstatico2)
+SOCIOS.agregarSocio(socioEstatico3)
+SOCIOS.agregarSocio(socioEstatico4)
 
-//nuevosSocios.map((el) => {
-
-//cantidadSocios.innerHTML = `
-
-//Borrar Nombre: ${el.nombre} /  Edad: ${el.edad} / Año nacimiento: ${el.anoDeNacimiento()} / Número de socio ${el.numeroDeSocio}`
-
-//})
-
-    }
-}})}
+SOCIOS.LogArray()
+SOCIOS.mostrarEnHTML()
+SOCIOS.mostrarUltimoSocio()
+SOCIOS.borrarSocioHTML()
 
 
-    submitFormulario("ingresoSocios")
-    
+
+
+
+// toma datos del formulario y construye un socio nuevo
+const submitFormulario = (ID) => {
+    let form = document.getElementById(ID);
+    form.addEventListener(`submit`, (event) => {
+    event.preventDefault();
+    let nombre = form.children[0].value
+    let edad = form.children[1].value
+    let socio = new Socio (nombre,parseInt(edad))
+    SOCIOS.agregarSocio(socio)
+    console.log(socio);
+    SOCIOS.mostrarUltimoSocio(socio)
+    SOCIOS.LogArray()
+})}
+
+// invocación para que el formulario tome los datos ingresados
+submitFormulario("formulario")
+
+
+
+
+
