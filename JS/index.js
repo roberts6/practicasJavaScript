@@ -31,7 +31,7 @@ class Socios{
         })
     }
     borrarSocioHTML(socio){
-        let elememto = document.getElementById(socio.numeroDeSocio)
+        let elememto = document.getElementById(socio?.numeroDeSocio)
         elememto.remove()
     }
     generadorID(){
@@ -74,11 +74,11 @@ class Socios{
     mostrarUltimoSocio (socio){
         let contenedor = document.getElementById("contenedor")
             const elememto = document.createElement("div")
-            elememto.id = socio.numeroDeSocio
+            elememto.id = socio?.numeroDeSocio
             elememto.className = "socio"
             elememto.innerHTML = `
-            <div class= "nombreSocio">${socio.nombre}</div>
-            <div class= "edadSocio">${socio.edad}</div>
+            <div class= "nombreSocio">${socio?.nombre}</div>
+            <div class= "edadSocio">${socio?.edad}</div>
             `
             const botonBorrar = document.createElement("button")
             botonBorrar.textContent = "Borrar"
