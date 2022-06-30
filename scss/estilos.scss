@@ -7,13 +7,13 @@
     text-align: center; }
 
     .fondo{
-        height: 100%;
-        width: 100%;
+        height: 100vh;
+        width: 100vw;
         position: absolute;
         top: 0;
         left: 0;
         z-index: -100;
-        opacity:0.2;
+        opacity:0.12;
     }
     
     main{
@@ -41,7 +41,9 @@
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
+        align-items: flex-start;
            .socio{
             margin: 1vw 1vw;
+            border: 1px black solid;
            }       
     }
