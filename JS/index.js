@@ -140,7 +140,7 @@ submitFormulario("formulario")
 
 
 
-const JSON = require('../storage.json')
+const JSON = require('./../storage.json')
 
 
 
