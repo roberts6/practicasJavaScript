@@ -70,6 +70,12 @@ class Socios{
             this.borrarSocioHTML(socio)
             localStorage.removeItem(socio)
             this.LogArray()
+            this.mostrarUltimoSocio(socio)
+                this.menoresEdad(socio)
+                this.mayoresEdad(socio)
+                this.LogArray()
+                this.creaJson()
+                this.muestraJson()
         }
         // agrego el botón creado a mi elemento
         elememto.append(botonBorrar)
@@ -98,6 +104,12 @@ class Socios{
                 this.borrarSocioHTML(socio)
                 localStorage.removeItem(socio)
                 this.LogArray()
+                this.mostrarUltimoSocio(socio)
+                this.menoresEdad(socio)
+                this.mayoresEdad(socio)
+                this.LogArray()
+                this.creaJson()
+                this.muestraJson()
             }
          
             elememto.append(botonBorrar)
@@ -112,6 +124,26 @@ class Socios{
             const listaJson = localStorage.key(index);
             console.log(JSON.parse(storage));
         }
+    }
+    menoresEdad(socio){
+        const menores = this.listaNuevosSocios.filter(socio => socio.edad <= 10)
+    console.log("Estos son los socios menores de edad:",menores)
+    
+    const menoresEdad = [];
+  for (let index = 0; index < menores.length; index++) {
+        menoresEdad.push(menores[index].nombre)
+    }
+    let listaMenores = menoresEdad.toString(" ");
+}
+    mayoresEdad(socio){
+        const mayores = this.listaNuevosSocios.filter(socio => socio.edad > 10)
+    console.log("Estos son los socios mayores de edad:",mayores)
+
+    const mayoresEdad = [];
+    for (let index = 0; index < mayores.length; index++) {
+        mayoresEdad.push(mayores[index].nombre)   
+    }
+    let listaMayores = mayoresEdad.toString(" ");
     }
 }
 
@@ -149,6 +181,8 @@ const submitFormulario = (ID) => {
     SOCIOS.agregarSocio(socio)
     console.log(socio);
     SOCIOS.mostrarUltimoSocio(socio)
+    SOCIOS.menoresEdad(socio)
+    SOCIOS.mayoresEdad(socio)
     SOCIOS.LogArray()
     SOCIOS.creaJson()
     SOCIOS.muestraJson()
