@@ -2,8 +2,9 @@ const ano = new Date();
 
 // clase que construye socio con su información
 class Socio {
-    constructor (nombre, edad) {
+    constructor (nombre,apellido, edad) {
 this.nombre = nombre;
+this.apellido = apellido;
 this.edad = edad;
 this.numeroDeSocio = Math.round (Math.random() * 10000);;
 this.anoActual = ano.getFullYear();
@@ -54,24 +55,28 @@ class Socios{
             elememto.className = "socio"
             elememto.innerHTML = `
             <div class= "nombreSocio">Nombre: ${socio.nombre}</div>
+            <div class= "nombreSocio">Apellido: ${socio.apellido}</div>
             <div class= "edadSocio">Edad: ${socio.edad}</div>
             <div class= "edadSocio">Año de nacimiento: ${socio.anoDeNacimiento()}</div>
             <div class= "edadSocio">Nº de socio: ${socio.numeroDeSocio}</div>
-            `
+            `  
+
             // creo botón para borrar
-            const botonBorrar = document.createElement("button")
-            botonBorrar.textContent = "Borrar"
-            // acción del botón
-            botonBorrar.onclick = () => {
-                this.borrarSocio(socio)
-                this.borrarSocioHTML(socio)
-                this.LogArray()
-            }
-            // agrego el botón creado a mi elemento
-            elememto.append(botonBorrar)
-            // agrego el elemento creado a mi contenedor
-            contenedor.append(elememto)
+        const botonBorrar = document.createElement("button")
+        botonBorrar.textContent = "Borrar"
+        // acción del botón
+        botonBorrar.onclick = () => {
+            this.borrarSocio(socio)
+            this.borrarSocioHTML(socio)
+            localStorage.removeItem(socio)
+            this.LogArray()
         }
+        // agrego el botón creado a mi elemento
+        elememto.append(botonBorrar)
+        // agrego el elemento creado a mi contenedor
+        contenedor.append(elememto)
+}
+
     }
     mostrarUltimoSocio (socio){
         let contenedor = document.getElementById("contenedor")
@@ -80,6 +85,7 @@ class Socios{
             elememto.className = "socio"
             elememto.innerHTML = `
             <div class= "nombreSocio">Nombre: ${socio?.nombre}</div>
+            <div class= "nombreSocio">Apellido: ${socio?.apellido}</div>
             <div class= "edadSocio">Edad: ${socio?.edad}</div>
             <div class= "edadSocio">Año de nacimiento: ${socio?.anoDeNacimiento()}</div>
             <div class= "edadSocio">Nº de socio: ${socio?.numeroDeSocio}</div>
@@ -90,13 +96,23 @@ class Socios{
             botonBorrar.onclick = () => {
                 this.borrarSocio(socio)
                 this.borrarSocioHTML(socio)
+                localStorage.removeItem(socio)
                 this.LogArray()
             }
          
             elememto.append(botonBorrar)
             contenedor.append(elememto)
     }
-
+    creaJson(){
+        localStorage.setItem("listadoSocios", JSON.stringify(this.listaNuevosSocios))
+    }
+    muestraJson(){
+        let storage = localStorage.getItem("listadoSocios")
+        for (let index = 0; index < localStorage.length; index++) {
+            const listaJson = localStorage.key(index);
+            console.log(JSON.parse(storage));
+        }
+    }
 }
 
 
@@ -105,10 +121,10 @@ const SOCIOS = new Socios()
 
 
 // Ingreso de socios de forma estática
-const socioEstatico1 = new Socio("Beni", 2);
-const socioEstatico2 = new Socio("Oscar", 34);  
-const socioEstatico3 = new Socio("Cecilia", 33);  
-const socioEstatico4 = new Socio("Mila", 3);
+const socioEstatico1 = new Socio("Beni","Roberts", 2);
+const socioEstatico2 = new Socio("Oscar","Roberts", 34);  
+const socioEstatico3 = new Socio("Cecilia","Olguin", 33);  
+const socioEstatico4 = new Socio("Mila","Roberts", 3);
 
 
 SOCIOS.agregarSocio(socioEstatico1)
@@ -127,20 +143,21 @@ const submitFormulario = (ID) => {
     form.addEventListener(`submit`, (event) => {
     event.preventDefault();
     let nombre = form.children[0].value
-    let edad = form.children[1].value
-    let socio = new Socio (nombre,parseInt(edad))
+    let apellido = form.children[1].value
+    let edad = form.children[2].value
+    let socio = new Socio (nombre,apellido,parseInt(edad))
     SOCIOS.agregarSocio(socio)
     console.log(socio);
     SOCIOS.mostrarUltimoSocio(socio)
     SOCIOS.LogArray()
+    SOCIOS.creaJson()
+    SOCIOS.muestraJson()
 })}
 
 // invocación para que el formulario tome los datos ingresados
 submitFormulario("formulario")
 
 
-
-const JSON = require('./../storage.json')
 
 
 

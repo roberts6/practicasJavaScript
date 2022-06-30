@@ -37,7 +37,8 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  align-items: flex-start; }
+  align-items: flex-start;
+  justify-content: center; }
   #contenedor .socio {
     margin: 1vw 1vw;
     border: 1px black solid; }
