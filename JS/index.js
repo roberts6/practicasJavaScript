@@ -121,10 +121,6 @@ SOCIOS.mostrarEnHTML()
 SOCIOS.mostrarUltimoSocio()
 SOCIOS.borrarSocioHTML()
 
-
-
-
-
 // toma datos del formulario y construye un socio nuevo
 const submitFormulario = (ID) => {
     let form = document.getElementById(ID);
@@ -143,6 +139,8 @@ const submitFormulario = (ID) => {
 submitFormulario("formulario")
 
 
+
+const JSON = require('../storage.json')
 
 
 
