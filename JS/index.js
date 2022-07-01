@@ -70,12 +70,6 @@ class Socios{
             this.borrarSocioHTML(socio)
             localStorage.removeItem(socio)
             this.LogArray()
-            this.mostrarUltimoSocio(socio)
-                this.menoresEdad(socio)
-                this.mayoresEdad(socio)
-                this.LogArray()
-                this.creaJson()
-                this.muestraJson()
         }
         // agrego el botón creado a mi elemento
         elememto.append(botonBorrar)
@@ -104,7 +98,6 @@ class Socios{
                 this.borrarSocioHTML(socio)
                 localStorage.removeItem(socio)
                 this.LogArray()
-                this.mostrarUltimoSocio(socio)
                 this.menoresEdad(socio)
                 this.mayoresEdad(socio)
                 this.LogArray()
@@ -168,6 +161,8 @@ SOCIOS.LogArray()
 SOCIOS.mostrarEnHTML()
 SOCIOS.mostrarUltimoSocio()
 SOCIOS.borrarSocioHTML()
+SOCIOS.menoresEdad()
+SOCIOS.mayoresEdad()
 
 // toma datos del formulario y construye un socio nuevo
 const submitFormulario = (ID) => {
