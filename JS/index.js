@@ -6,6 +6,7 @@ class Socio {
 this.nombre = nombre;
 this.apellido = apellido;
 this.edad = edad;
+this.estado = (edad > 10) ? "Mayor" : "Menor" // --> operador ternario. Evalua una condición y retorna, en este caso, 2 posibles respuestas
 this.numeroDeSocio = Math.round (Math.random() * 10000);;
 this.anoActual = ano.getFullYear();
     }
@@ -39,7 +40,7 @@ class Socios{
         (this.listaNuevosSocios.length) + 1
     }
     LogArray(){
-        console.log(this.listaNuevosSocios);
+        console.log("Total de socios:",this.listaNuevosSocios);
         
     }
     mostrarEnHTML(){
@@ -48,14 +49,20 @@ class Socios{
         for (let index = 0; index < this.listaNuevosSocios.length; index++) {
             // itera cada socio dentro de mi array
             const socio = this.listaNuevosSocios[index];
+
+// Desestructuraciones
+            const Nsocio = socio.numeroDeSocio
+            const nombre = socio.nombre 
+            const apellido = socio.apellido 
+
             // crea un div por cada elemento
             const elememto = document.createElement("div")
             // le voy a asignar un id y una clase a cada socio. Como valor va a tomar su numero de socio
-            elememto.id = socio.numeroDeSocio
+            elememto.id = Nsocio
             elememto.className = "socio"
             elememto.innerHTML = `
-            <div class= "nombreSocio">Nombre: ${socio.nombre}</div>
-            <div class= "nombreSocio">Apellido: ${socio.apellido}</div>
+            <div class= "nombreSocio">Nombre: ${nombre}</div>
+            <div class= "nombreSocio">Apellido: ${apellido}</div>
             <div class= "edadSocio">Edad: ${socio.edad}</div>
             <div class= "edadSocio">Año de nacimiento: ${socio.anoDeNacimiento()}</div>
             <div class= "edadSocio">Nº de socio: ${socio.numeroDeSocio}</div>
@@ -70,6 +77,10 @@ class Socios{
             this.borrarSocioHTML(socio)
             localStorage.removeItem(socio)
             this.LogArray()
+            this.menoresEdad(socio)
+            this.mayoresEdad(socio)
+            this.creaJson()
+            this.muestraJson()
         }
         // agrego el botón creado a mi elemento
         elememto.append(botonBorrar)
@@ -96,8 +107,6 @@ class Socios{
             botonBorrar.onclick = () => {
                 this.borrarSocio(socio)
                 this.borrarSocioHTML(socio)
-                localStorage.removeItem(socio)
-                this.LogArray()
                 this.menoresEdad(socio)
                 this.mayoresEdad(socio)
                 this.LogArray()
@@ -109,19 +118,24 @@ class Socios{
             contenedor.append(elememto)
     }
     creaJson(){
-        localStorage.setItem("listadoSocios", JSON.stringify(this.listaNuevosSocios))
+    localStorage.setItem("listadoSocios", JSON.stringify(this.listaNuevosSocios))
     }
     muestraJson(){
-        let storage = localStorage.getItem("listadoSocios")
+       let storage = localStorage.getItem("listadoSocios")
         for (let index = 0; index < localStorage.length; index++) {
             const listaJson = localStorage.key(index);
-            console.log(JSON.parse(storage));
-        }
+            console.log("En el localStorage hay guardados:",JSON.parse(storage));
+        } 
+        /* const guardadosEnJson = JSON.parse(localStorage.getItem("listadoSocios"))
+        this.listaNuevosSocios = []
+        for (const socio of guardadosEnJson) {
+            this.listaNuevosSocios.push(new Socio(socio))
+            console.log(this.listaNuevosSocios);  
+        }*/
     }
     menoresEdad(socio){
         const menores = this.listaNuevosSocios.filter(socio => socio.edad <= 10)
-    console.log("Estos son los socios menores de edad:",menores)
-    
+        console.log("Estos son los socios menores de edad:",menores)
     const menoresEdad = [];
   for (let index = 0; index < menores.length; index++) {
         menoresEdad.push(menores[index].nombre)
@@ -163,6 +177,9 @@ SOCIOS.mostrarUltimoSocio()
 SOCIOS.borrarSocioHTML()
 SOCIOS.menoresEdad()
 SOCIOS.mayoresEdad()
+SOCIOS.creaJson()
+SOCIOS.muestraJson()
+
 
 // toma datos del formulario y construye un socio nuevo
 const submitFormulario = (ID) => {
