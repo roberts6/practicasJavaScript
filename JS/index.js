@@ -73,14 +73,14 @@ class Socios{
         botonBorrar.textContent = "Borrar"
         // acción del botón
         botonBorrar.onclick = () => {
-            this.borrarSocio(socio)
-            this.borrarSocioHTML(socio)
-            localStorage.removeItem(socio)
-            this.LogArray()
-            this.menoresEdad(socio)
-            this.mayoresEdad(socio)
-            this.creaJson()
-            this.muestraJson()
+                this.alertaDelete()
+                this.borrarSocio(socio)
+                this.borrarSocioHTML(socio)
+                this.menoresEdad(socio)
+                this.mayoresEdad(socio)
+                this.LogArray()
+                this.creaJson()
+                this.muestraJson()
         }
         // agrego el botón creado a mi elemento
         elememto.append(botonBorrar)
@@ -105,11 +105,13 @@ class Socios{
             botonBorrar.textContent = "Borrar"
 
             botonBorrar.onclick = () => {
+                this.alertaDelete()
                 this.borrarSocio(socio)
                 this.borrarSocioHTML(socio)
+                localStorage.removeItem(socio)
+                this.LogArray()
                 this.menoresEdad(socio)
                 this.mayoresEdad(socio)
-                this.LogArray()
                 this.creaJson()
                 this.muestraJson()
             }
@@ -151,6 +153,25 @@ class Socios{
         mayoresEdad.push(mayores[index].nombre)   
     }
     let listaMayores = mayoresEdad.toString(" ");
+    }
+    alertaDelete(socio){
+        Swal.fire({
+            title: '¿Seguro que querés eliminar a ' + socio?.nombre +'?',
+            text: "Esta acción no se puede revertir!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, quiero eliminar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
     }
 }
 
