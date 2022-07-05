@@ -193,12 +193,6 @@ class Socios{
             const listaJson = localStorage.key(index);
             console.log("En el localStorage hay guardados:",JSON.parse(storage));
         } 
-        /* const guardadosEnJson = JSON.parse(localStorage.getItem("listadoSocios"))
-        this.listaNuevosSocios = []
-        for (const socio of guardadosEnJson) {
-            this.listaNuevosSocios.push(new Socio(socio))
-            console.log(this.listaNuevosSocios);  
-        }*/
     }
     menoresEdad(socio){
         const menores = this.listaNuevosSocios.filter(socio => socio.edad <= 10)
@@ -219,25 +213,11 @@ class Socios{
     }
     let listaMayores = mayoresEdad.toString(" ");
     }
-   /* alertaDelete(socio){
-        Swal.fire({
-            title: '¿Seguro que querés eliminar a ' + socio?.nombre +'?',
-            text: "Esta acción no se puede revertir!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, quiero eliminar'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
-            }
-          })
-   } */
+    diaYhora(){
+        const DateTime = luxon.DateTime
+       const now = DateTime.now();
+        console.log("esta es la hora ",now);
+   } 
 }
 
 
@@ -265,6 +245,7 @@ SOCIOS.menoresEdad()
 SOCIOS.mayoresEdad()
 SOCIOS.creaJson()
 SOCIOS.muestraJson()
+SOCIOS.diaYhora()
 
 
 // toma datos del formulario y construye un socio nuevo
