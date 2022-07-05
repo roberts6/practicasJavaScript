@@ -73,21 +73,53 @@ class Socios{
         botonBorrar.textContent = "Borrar"
         // acción del botón
         botonBorrar.onclick = () => {
-                this.alertaDelete()
-                this.borrarSocio(socio)
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+              })
+              
+              swalWithBootstrapButtons.fire({
+                title: '¿Estás seguro que querés eliminar a ' + socio.nombre + '?',
+                text: "Esta acción no se puede revertir!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'No, cancelar!',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  swalWithBootstrapButtons.fire(
+                    'HECHO!',
+                    'El socio ha sido eliminado.',
+                    'success'
+                  )
+                  this.borrarSocio(socio)
                 this.borrarSocioHTML(socio)
                 this.menoresEdad(socio)
                 this.mayoresEdad(socio)
                 this.LogArray()
                 this.creaJson()
                 this.muestraJson()
+                } else if (
+                  /* Read more about handling dismissals below */
+                  result.dismiss === Swal.DismissReason.cancel
+                ) {
+                  swalWithBootstrapButtons.fire(
+                    'Cancelado',
+                    'No ha habido cambios',
+                    'error'
+                  )
+                }
+              })
         }
-        // agrego el botón creado a mi elemento
-        elememto.append(botonBorrar)
-        // agrego el elemento creado a mi contenedor
-        contenedor.append(elememto)
-}
-
+         // agrego el botón creado a mi elemento
+         elememto.append(botonBorrar)
+         // agrego el elemento creado a mi contenedor
+         contenedor.append(elememto)
+        }
     }
     mostrarUltimoSocio (socio){
         let contenedor = document.getElementById("contenedor")
@@ -105,15 +137,48 @@ class Socios{
             botonBorrar.textContent = "Borrar"
 
             botonBorrar.onclick = () => {
-                this.alertaDelete()
-                this.borrarSocio(socio)
-                this.borrarSocioHTML(socio)
-                localStorage.removeItem(socio)
-                this.LogArray()
-                this.menoresEdad(socio)
-                this.mayoresEdad(socio)
-                this.creaJson()
-                this.muestraJson()
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                      confirmButton: 'btn btn-success',
+                      cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                  })
+                  
+                  swalWithBootstrapButtons.fire({
+                    title: '¿Estás seguro que querés eliminar a ' + socio.nombre + '?',
+                    text: "Esta acción no se puede revertir!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Si, eliminar!',
+                    cancelButtonText: 'No, cancelar!',
+                    reverseButtons: true
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      swalWithBootstrapButtons.fire(
+                        'HECHO!',
+                        'El socio ha sido eliminado.',
+                        'success'
+                      )
+                      this.borrarSocio(socio)
+                      this.borrarSocioHTML(socio)
+                      localStorage.removeItem(socio)
+                      this.LogArray()
+                      this.menoresEdad(socio)
+                      this.mayoresEdad(socio)
+                      this.creaJson()
+                      this.muestraJson()
+                    } else if (
+                      /* Read more about handling dismissals below */
+                      result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                      swalWithBootstrapButtons.fire(
+                        'Cancelado',
+                        'No ha habido cambios',
+                        'error'
+                      )
+                    }
+                  })
             }
          
             elememto.append(botonBorrar)
@@ -154,7 +219,7 @@ class Socios{
     }
     let listaMayores = mayoresEdad.toString(" ");
     }
-    alertaDelete(socio){
+   /* alertaDelete(socio){
         Swal.fire({
             title: '¿Seguro que querés eliminar a ' + socio?.nombre +'?',
             text: "Esta acción no se puede revertir!",
@@ -172,7 +237,7 @@ class Socios{
               )
             }
           })
-    }
+   } */
 }
 
 

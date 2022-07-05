@@ -42,3 +42,6 @@ main {
   #contenedor .socio {
     margin: 1vw 1vw;
     border: 1px black solid; }
+
+.btn {
+  margin: 0.6vw; }

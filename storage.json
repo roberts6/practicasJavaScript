@@ -190,3 +190,13 @@ const submitFormulario = (ID) => {
 
 // invocación para que el formulario tome los datos ingresados
 submitFormulario("formulario")
+
+
+
+this.borrarSocio(socio)
+                this.borrarSocioHTML(socio)
+                this.menoresEdad(socio)
+                this.mayoresEdad(socio)
+                this.LogArray()
+                this.creaJson()
+                this.muestraJson()
