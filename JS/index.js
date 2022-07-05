@@ -225,7 +225,7 @@ class Socios{
          {zone: 'America/buenos-aires', numberingSystem: 'beng'}
        )
        const diaParaResta = (now.year,now.month,now.day)
-       console.log("esta es la hora ",diaParaResta);
+       console.log("esto trae Luxon ",diaParaResta);
         let contenedorFecha = document.getElementById("fecha")
         const elememtoFecha = document.createElement("div")
         elememtoFecha.className = "horaYfecha"
