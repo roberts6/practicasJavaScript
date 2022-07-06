@@ -231,7 +231,7 @@ class Socios{
         elememtoFecha.className = "horaYfecha"
         elememtoFecha.innerHTML = `
             ${now.day} / ${now.month} / ${now.year}
-            ${now.hour}:${now.minute} -- ${now.zoneName}
+            ${now.hour}:${now.minute}
             `
             contenedorFecha.append(elememtoFecha)
    } 
@@ -291,8 +291,3 @@ const submitFormulario = (ID) => {
 
 // invocación para que el formulario tome los datos ingresados
 submitFormulario("formulario")
-
-
-
-
-
