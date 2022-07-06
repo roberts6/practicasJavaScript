@@ -2,24 +2,39 @@ const fechaHoy = new Date();
 
 // clase que construye socio con su información
 class Socio {
-    constructor (nombre,apellido, edad) {
+    constructor (nombre,apellido, fechaNac) {
 this.nombre = nombre;
 this.apellido = apellido;
-this.edad = edad;
-//this.dia = dia;
-//this.mes = mes;
-//this.anoNacimiento = anoNacimiento;
-this.estado = (edad > 10) ? "Mayor" : "Menor" // --> operador ternario. Evalua una condición y retorna, en este caso, 2 posibles respuestas
+this.fechaNac = fechaNac;
+this.edad = this.calcularEdad();
+
+this.estado = (this.edad > 10) ? "Mayor" : "Menor" // --> operador ternario. Evalua una condición y retorna, en este caso, 2 posibles respuestas
 this.numeroDeSocio = Math.round (Math.random() * 10000);;
 //this.anoActual = ano.getFullYear();
-    }
-    anoDeNacimiento(){
-       //return this.anoActual - this.edad;
-       //return this.diaYhora() 
     }
     SocioID (){
         return this.numeroDeSocio * 2;
     }
+    calcularEdad(){
+      const fechaActual = new Date();
+      const anoActual = parseInt(fechaActual.getFullYear());
+      const mesActual = parseInt(fechaActual.getMonth());
+      const diaActual = parseInt(fechaActual.getDay());
+  
+      const anoNacimientoSocio = parseInt(String(this.fechaNac).substring(0,4));
+      const mesNacimientoSocio = parseInt(String(this.fechaNac).substring(5,7));
+      const diaNacimientoSocio = parseInt(String(this.fechaNac).substring(8,10)); 
+
+      let edadActual = anoActual - anoNacimientoSocio
+      if (mesActual < mesNacimientoSocio) {
+        edadActual--;
+      }else if (mesActual === mesNacimientoSocio) {
+        if (diaActual < diaNacimientoSocio) {
+          edadActual--;
+        }
+      }
+      return edadActual;
+     }
 }
 
 
@@ -58,6 +73,7 @@ class Socios{
             const Nsocio = socio.numeroDeSocio
             const nombre = socio.nombre 
             const apellido = socio.apellido 
+            const edad = socio.edad
 
             // crea un div por cada elemento
             const elememto = document.createElement("div")
@@ -67,8 +83,9 @@ class Socios{
             elememto.innerHTML = `
             <div class= "nombreSocio">Nombre: ${nombre}</div>
             <div class= "nombreSocio">Apellido: ${apellido}</div>
-            <div class= "edadSocio">Edad: ${socio.edad}</div>
-            <div class= "edadSocio">Año de nacimiento: ${socio.anoDeNacimiento()}</div>
+            <div class= "edadSocio">Edad: ${edad}</div>
+            <div class= "edadSocio">Abono: ${socio.estado}</div>
+            <div class= "edadSocio">Año de nacimiento: ${socio.fechaNac}</div>
             <div class= "edadSocio">Nº de socio: ${socio.numeroDeSocio}</div>
             `  
 
@@ -134,7 +151,8 @@ class Socios{
             <div class= "nombreSocio">Nombre: ${socio?.nombre}</div>
             <div class= "nombreSocio">Apellido: ${socio?.apellido}</div>
             <div class= "edadSocio">Edad: ${socio?.edad}</div>
-            <div class= "edadSocio">Año de nacimiento: ${socio?.anoDeNacimiento()}</div>
+            <div class= "edadSocio">Abono: ${socio?.estado}</div>
+            <div class= "edadSocio">Año de nacimiento: ${socio?.fechaNac}</div>
             <div class= "edadSocio">Nº de socio: ${socio?.numeroDeSocio}</div>
             `
             const botonBorrar = document.createElement("button")
@@ -220,12 +238,7 @@ class Socios{
     diaYhora(){
         const DateTime = luxon.DateTime
        const now = DateTime.now();
-       const dt = DateTime.fromObject (
-         {now},
-         {zone: 'America/buenos-aires', numberingSystem: 'beng'}
-       )
-       const diaParaResta = (now.year,now.month,now.day)
-       console.log("esto trae Luxon ",diaParaResta);
+       console.log("esto trae Luxon ",now);
         let contenedorFecha = document.getElementById("fecha")
         const elememtoFecha = document.createElement("div")
         elememtoFecha.className = "horaYfecha"
@@ -235,6 +248,9 @@ class Socios{
             `
             contenedorFecha.append(elememtoFecha)
    } 
+   obtenerEdad () {
+
+   }
 }
 
 
@@ -243,10 +259,10 @@ const SOCIOS = new Socios()
 
 
 // Ingreso de socios de forma estática
-const socioEstatico1 = new Socio("Beni","Roberts", 2);
-const socioEstatico2 = new Socio("Oscar","Roberts", 34);  
-const socioEstatico3 = new Socio("Cecilia","Olguin", 33);  
-const socioEstatico4 = new Socio("Mila","Roberts", 3);
+const socioEstatico1 = new Socio("Beni","Roberts",parseInt("2020/6/5"));
+const socioEstatico2 = new Socio("Oscar","Roberts", parseInt("1987/12/26"));  
+const socioEstatico3 = new Socio("Cecilia","Olguin", parseInt("1988/4/8"));  
+const socioEstatico4 = new Socio("Mila","Roberts", parseInt("2019/2/3"));
 
 
 SOCIOS.agregarSocio(socioEstatico1)
@@ -272,13 +288,16 @@ const submitFormulario = (ID) => {
     event.preventDefault();
     let nombre = document.querySelector("#validationDefaultNombre").value
     let apellido = document.querySelector("#validationDefaultApellido").value
-    let edad = document.querySelector("#validationDefaultFechaNac").value
-    console.log("esto trae: ",edad);
+    let fechaNac = document.querySelector("#validationDefaultFechaNac").value
     
+    console.log("nació en: ",fechaNac);
+    
+
+
     let dia = document.querySelector("#validationDefaultNombre").value
     let mes = document.querySelector("#validationDefaultNombre").value
     let anoNacimiento = document.querySelector("#validationDefaultNombre").value
-    let socio = new Socio (nombre,apellido,parseInt(edad))
+    let socio = new Socio (nombre,apellido,parseInt(fechaNac))
     SOCIOS.agregarSocio(socio)
     console.log(socio);
     SOCIOS.mostrarUltimoSocio(socio)
@@ -291,3 +310,8 @@ const submitFormulario = (ID) => {
 
 // invocación para que el formulario tome los datos ingresados
 submitFormulario("formulario")
+
+
+
+
+

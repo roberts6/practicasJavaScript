@@ -1,13 +1,11 @@
 const fechaHoy = new Date();
-const yo = "1987/12/26"
 
 // clase que construye socio con su información
 class Socio {
-    constructor (nombre,apellido, fechaNac) {
+    constructor (nombre,apellido, edad) {
 this.nombre = nombre;
 this.apellido = apellido;
-this.fechaNac = fechaNac;
-this.edad = this.calcularEdad();
+this.edad = edad;
 //this.dia = dia;
 //this.mes = mes;
 //this.anoNacimiento = anoNacimiento;
@@ -22,20 +20,6 @@ this.numeroDeSocio = Math.round (Math.random() * 10000);;
     SocioID (){
         return this.numeroDeSocio * 2;
     }
-    calcularEdad(){
-      const fechaActual = new Date();
-      const anoActual = parseInt(fechaActual.getFullYear());
-      const mesActual = parseInt(fechaActual.getMonth());
-      const diaActual = parseInt(fechaActual.getDay());
-  
-      const anoNacimientoSocio = parseInt(String(this.fechaNac).substring(0,4));
-      const mesNacimientoSocio = parseInt(String(this.fechaNac).substring(5,7));
-      const diaNacimientoSocio = parseInt(String(this.fechaNac).substring(8,10)); 
-
-      let edadActual = anoActual - anoNacimientoSocio
-      console.log(edadActual);
-      
-     }
 }
 
 
@@ -236,7 +220,12 @@ class Socios{
     diaYhora(){
         const DateTime = luxon.DateTime
        const now = DateTime.now();
-       console.log("esto trae Luxon ",now);
+       const dt = DateTime.fromObject (
+         {now},
+         {zone: 'America/buenos-aires', numberingSystem: 'beng'}
+       )
+       const diaParaResta = (now.year,now.month,now.day)
+       console.log("esto trae Luxon ",diaParaResta);
         let contenedorFecha = document.getElementById("fecha")
         const elememtoFecha = document.createElement("div")
         elememtoFecha.className = "horaYfecha"
@@ -254,7 +243,7 @@ const SOCIOS = new Socios()
 
 
 // Ingreso de socios de forma estática
-const socioEstatico1 = new Socio("Beni","Roberts", 5/6/2020);
+const socioEstatico1 = new Socio("Beni","Roberts", 2);
 const socioEstatico2 = new Socio("Oscar","Roberts", 34);  
 const socioEstatico3 = new Socio("Cecilia","Olguin", 33);  
 const socioEstatico4 = new Socio("Mila","Roberts", 3);
@@ -283,12 +272,9 @@ const submitFormulario = (ID) => {
     event.preventDefault();
     let nombre = document.querySelector("#validationDefaultNombre").value
     let apellido = document.querySelector("#validationDefaultApellido").value
-    let fechaNac = document.querySelector("#validationDefaultFechaNac").value
+    let edad = document.querySelector("#validationDefaultFechaNac").value
+    console.log("esto trae: ",edad);
     
-    console.log("nació en: ",fechaNac);
-    
-
-
     let dia = document.querySelector("#validationDefaultNombre").value
     let mes = document.querySelector("#validationDefaultNombre").value
     let anoNacimiento = document.querySelector("#validationDefaultNombre").value
@@ -305,8 +291,3 @@ const submitFormulario = (ID) => {
 
 // invocación para que el formulario tome los datos ingresados
 submitFormulario("formulario")
-
-
-
-
-
