@@ -1,3 +1,5 @@
+$colorVerde:#8ED122;
+
 * {
     padding: 0;
     margin: 0;
@@ -30,7 +32,7 @@
         font-family: 'Balsamiq Sans', cursive;
         font-family: 'Lobster', cursive;
         font-size: 6vw;
-        color: #8ED122;
+        color: $colorVer;
     }
 
     #formulario {
@@ -65,10 +67,10 @@
 
     .col-12{
         .btn{
-            background-color: #8ED122;
+            background-color: $colorVer;
         }
-        &hover{
-            background-color: #8ED122;
+        &:hover{
+            background-color: #9DFF00;
         }
     }
 
