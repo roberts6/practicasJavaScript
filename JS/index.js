@@ -86,7 +86,7 @@ class Socios{
             <div class= "edadSocio">Edad: ${edad}</div>
             <div class= "edadSocio">Abono: ${socio.estado}</div>
             <div class= "edadSocio">Año de nacimiento: ${socio.fechaNac}</div>
-            <div class= "edadSocio">Nº de socio: ${socio.numeroDeSocio}</div>
+            <div class= "edadSocio">Nº de socio: ${Nsocio}</div>
             `  
 
             // creo botón para borrar

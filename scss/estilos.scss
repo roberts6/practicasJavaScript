@@ -26,7 +26,11 @@
 
     .titulo {
         grid-row: 1;
-        grid-column: 4/8;
+        grid-column: 3/9;
+        font-family: 'Balsamiq Sans', cursive;
+        font-family: 'Lobster', cursive;
+        font-size: 6vw;
+        color: #8ED122;
     }
 
     #formulario {
@@ -59,15 +63,21 @@
         margin: 0.6vw;
     }
 
+    .col-12{
+        .btn{
+            background-color: #8ED122;
+        }
+        &hover{
+            background-color: #8ED122;
+        }
+    }
+
     #fecha{
         grid-row: 1;
-        grid-column: 10;
-        .horaYfecha{
-                    display: flex;
-                    flex-direction: column;
-                    align-content: center;
-                    justify-content: center;
-                    font-size: 1.5vw;                
-                    font-weight: 600;
-        }
+        grid-column: 10;display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        font-size: 1.5vw;                
+        font-weight: 600;
     }
