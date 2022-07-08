@@ -236,21 +236,19 @@ class Socios{
     let listaMayores = mayoresEdad.toString(" ");
     }
     diaYhora(){
-        const DateTime = luxon.DateTime
-       const now = DateTime.now();
-       console.log("esto trae Luxon ",now);
-        let contenedorFecha = document.getElementById("fecha")
+      let contenedorFecha = document.getElementById("fecha")
         const elememtoFecha = document.createElement("div")
+        const DateTime = luxon.DateTime
+      const intervalo = setInterval(() => { // --> este intervalo hace que cada 1'' se ejecute la const now, resfrescado el reloj
+       const now = DateTime.now();
         elememtoFecha.className = "horaYfecha"
         elememtoFecha.innerHTML = `
             ${now.day} / ${now.month} / ${now.year}
             ${now.hour}:${now.minute}
             `
             contenedorFecha.append(elememtoFecha)
-   } 
-   obtenerEdad () {
-
-   }
+          }, 1000);
+        } 
 }
 
 
