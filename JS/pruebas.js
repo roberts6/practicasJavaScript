@@ -211,13 +211,91 @@ class Socios{
       fetch('/storage.json').then((response) => response.json())
       .then((resultado) => {
         console.log("Esto trae el JSON ",resultado);
+        let contenedor = document.getElementById("contenedor")
+        const elememto = document.createElement("div")
+        elememto.id = resultado?.numeroDeSocio
+        elememto.className = "socio"
+        elememto.innerHTML = `
+        <div class= "nombreSocio">Nombre: ${resultado?.nombre}</div>
+        <div class= "nombreSocio">Apellido: ${resultado?.apellido}</div>
+        <div class= "edadSocio">Edad: ${resultado?.edad}</div>
+        <div class= "edadSocio">Edad: ${resultado?.numeroDeSocio}</div>
+        <div class= "edadSocio">Nº de socio: ${resultado?.numeroDeSocio}</div>
+        `
+        const botonBorrar = document.createElement("button")
+        botonBorrar.textContent = "Borrar"
+
+        botonBorrar.onclick = () => {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+              })
+              
+              swalWithBootstrapButtons.fire({
+                title: '¿Estás seguro que querés eliminar a ' + socio.nombre + '?',
+                text: "Esta acción no se puede revertir!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'No, cancelar!',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  swalWithBootstrapButtons.fire(
+                    'HECHO!',
+                    'El socio ha sido eliminado.',
+                    'success'
+                  )
+                  this.borrarSocio(socio)
+                  this.borrarSocioHTML(socio)
+                  localStorage.removeItem(socio)
+                  this.LogArray()
+                  this.menoresEdad(socio)
+                  this.mayoresEdad(socio)
+                  this.creaJson()
+                  this.muestraJson()
+                } else if (
+                  /* Read more about handling dismissals below */
+                  result.dismiss === Swal.DismissReason.cancel
+                ) {
+                  swalWithBootstrapButtons.fire(
+                    'Cancelado',
+                    'No ha habido cambios',
+                    'error'
+                  )
+                }
+              })
+        }
+     
+        elememto.append(botonBorrar)
+        contenedor.append(elememto)
       }).catch((error) => {console.log(error)
     })
-  }
+}
   fetchAPI(){
     fetch('https://swapi.dev/api/people').then((response) => response.json())
       .then((resultado) => {
         console.log("Esto trae el JSON del API ",resultado);
+        for (let index = 0; index < resultado.length; index++) {
+          const persona = array[index];
+          
+          let contenedor = document.getElementById("contenedor")
+        const elememto = document.createElement("div")
+        elememto.id = persona[index]?.numeroDeSocio
+        elememto.className = "socio"
+        elememto.innerHTML = `
+        <div class= "nombreSocio">Nombre: ${persona[index]?.nombre}</div>
+        <div class= "nombreSocio">Apellido: ${persona[index]?.apellido}</div>
+        <div class= "edadSocio">Edad: ${persona[index]?.edad}</div>
+        <div class= "edadSocio">Edad: ${persona[index]?.numeroDeSocio}</div>
+        <div class= "edadSocio">Nº de socio: ${persona[index]?.numeroDeSocio}</div>
+        `
+        const botonBorrar = document.createElement("button")
+        botonBorrar.textContent = "Borrar"
+      }
       }).catch((error) => {console.log(error)
     })
   }
@@ -266,7 +344,7 @@ const SOCIOS = new Socios()
 
 
 // Ingreso de socios de forma estática
-const socioEstatico1 = new Socio("Beni","Roberts", 2);
+const socioEstatico1 = new Socio("Beni","Roberts", 2,parseInt("2020/6/5"));
 const socioEstatico2 = new Socio("Oscar","Roberts", 34);  
 const socioEstatico3 = new Socio("Cecilia","Olguin", 33);  
 const socioEstatico4 = new Socio("Mila","Roberts", 3);

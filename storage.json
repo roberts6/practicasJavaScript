@@ -1,5 +1,7 @@
 {
     "nombre": "Jeremias",
     "apellido": "Springfield",
-    "fechaNac": "1880/8/4"
+    "fechaNac": "1880/8/4",
+    "edad": 228
+    
 }
