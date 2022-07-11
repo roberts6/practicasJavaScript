@@ -190,6 +190,15 @@ class Socios{
     }
     creaJson(){
     localStorage.setItem("listadoSocios", JSON.stringify(this.listaNuevosSocios))
+    //fetch('/storage.json',{
+    //  method: 'POST',
+    //  body: JSON.stringify(this.listaNuevosSocios),
+    //  Headers: {
+    //    'content-type': 'application/json; charset=UTF-8'
+    //  }
+    //})
+    //.then((response) => response.json())
+    //.then((data) => console.log("a ver qué muestra esto",data));
     }
     muestraJson(){
        let storage = localStorage.getItem("listadoSocios")
@@ -198,6 +207,20 @@ class Socios{
             console.log("En el localStorage hay guardados:",JSON.parse(storage));
         } 
     }
+    fetchStorage(){
+      fetch('/storage.json').then((response) => response.json())
+      .then((resultado) => {
+        console.log("Esto trae el JSON ",resultado);
+      }).catch((error) => {console.log(error)
+    })
+  }
+  fetchAPI(){
+    fetch('https://swapi.dev/api/people').then((response) => response.json())
+      .then((resultado) => {
+        console.log("Esto trae el JSON del API ",resultado);
+      }).catch((error) => {console.log(error)
+    })
+  }
     menoresEdad(socio){
         const menores = this.listaNuevosSocios.filter(socio => socio.edad <= 10)
         console.log("Estos son los socios menores de edad:",menores)
@@ -263,6 +286,8 @@ SOCIOS.mayoresEdad()
 SOCIOS.creaJson()
 SOCIOS.muestraJson()
 SOCIOS.diaYhora()
+SOCIOS.fetchStorage()
+SOCIOS.fetchAPI()
 
 
 // toma datos del formulario y construye un socio nuevo

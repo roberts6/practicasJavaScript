@@ -238,10 +238,10 @@ class Socios{
     diaYhora(){
       let contenedorFecha = document.getElementById("fecha")
         const elememtoFecha = document.createElement("div")
+        elememtoFecha.className = "horaYfecha"
         const DateTime = luxon.DateTime
       const intervalo = setInterval(() => { // --> este intervalo hace que cada 1'' se ejecute la const now, resfrescado el reloj
        const now = DateTime.now();
-        elememtoFecha.className = "horaYfecha"
         elememtoFecha.innerHTML = `
             ${now.day} / ${now.month} / ${now.year}
             ${now.hour}:${now.minute}
@@ -279,6 +279,34 @@ SOCIOS.muestraJson()
 SOCIOS.diaYhora()
 
 
+const inputs = document.querySelectorAll(`#formulario input`)
+let expresiones = /^[a-zA-ZÀ-ÿ\s]{1,40}$/i;
+
+const validarForm = (e) => {
+  switch (e.target.value) {
+   case "nombre":
+      if (expresiones.test(e.target.value)) {
+        document.getElementById("validationDefaultNombre").classList.remove("incorrecto")
+      }else{
+          document.getElementById("validationDefaultNombre").classList.add("incorrecto")
+      }
+      break;
+     case "apellido":
+      if (expresiones.test(e.target.value)) {
+        document.getElementById("validationDefaultNombre").classList.remove("incorrecto")
+      }else{
+        document.getElementById("validationDefaultNombre").classList.add("incorrecto")
+      }
+     break;
+  }
+}
+
+inputs.forEach((input) => {
+  console.log(input.addEventListener('keyup', validarForm));
+   
+  input.addEventListener('blur', validarForm)
+  });
+
 // toma datos del formulario y construye un socio nuevo
 const submitFormulario = (ID) => {
     let form = document.getElementById(ID);
@@ -292,9 +320,10 @@ const submitFormulario = (ID) => {
     
 
 
-    let dia = document.querySelector("#validationDefaultNombre").value
-    let mes = document.querySelector("#validationDefaultNombre").value
-    let anoNacimiento = document.querySelector("#validationDefaultNombre").value
+    //let dia = document.querySelector("#validationDefaultNombre").value
+    //let mes = document.querySelector("#validationDefaultNombre").value
+    //let anoNacimiento = document.querySelector("#validationDefaultNombre").value
+
     let socio = new Socio (nombre,apellido,parseInt(fechaNac))
     SOCIOS.agregarSocio(socio)
     console.log(socio);
