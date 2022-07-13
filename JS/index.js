@@ -249,91 +249,108 @@ class Socios{
             contenedorFecha.append(elememtoFecha)
           }, 1000);
         } 
-        fetchStorage(){
-          fetch('/storage.json').then((response) => response.json())
-          .then((resultado) => {
-            console.log("Esto trae el JSON ",resultado);
-            let contenedor = document.getElementById("contenedor")
-            const elememto = document.createElement("div")
-            elememto.id = resultado?.numeroDeSocio
-            elememto.className = "socio"
-            elememto.innerHTML = `
-            <div class= "nombreSocio">Nombre: ${resultado?.nombre}</div>
-            <div class= "nombreSocio">Apellido: ${resultado?.apellido}</div>
-            <div class= "edadSocio">Edad: ${resultado?.edad}</div>
-            <div class= "edadSocio">Edad: ${resultado?.numeroDeSocio}</div>
-            <div class= "edadSocio">Nº de socio: ${resultado?.numeroDeSocio}</div>
-            `
-            const botonBorrar = document.createElement("button")
-            botonBorrar.textContent = "Borrar"
-    
-            botonBorrar.onclick = () => {
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                      confirmButton: 'btn btn-success',
-                      cancelButton: 'btn btn-danger'
-                    },
-                    buttonsStyling: false
-                  })
-                  
-                  swalWithBootstrapButtons.fire({
-                    title: '¿Estás seguro que querés eliminar a ' + socio.nombre + '?',
-                    text: "Esta acción no se puede revertir!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Si, eliminar!',
-                    cancelButtonText: 'No, cancelar!',
-                    reverseButtons: true
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      swalWithBootstrapButtons.fire(
-                        'HECHO!',
-                        'El socio ha sido eliminado.',
-                        'success'
-                      )
-                      this.borrarSocio(socio)
-                      this.borrarSocioHTML(socio)
-                      localStorage.removeItem(socio)
-                      this.LogArray()
-                      this.menoresEdad(socio)
-                      this.mayoresEdad(socio)
-                      this.creaJson()
-                      this.muestraJson()
-                    } else if (
-                      /* Read more about handling dismissals below */
-                      result.dismiss === Swal.DismissReason.cancel
-                    ) {
-                      swalWithBootstrapButtons.fire(
-                        'Cancelado',
-                        'No ha habido cambios',
-                        'error'
-                      )
-                    }
-                  })
-            }
+    fetchStorage(socio){
+      fetch('/storage.json').then((response) => response.json())
+      .then((resultado) => {
+        console.log("Esto trae el JSON ",resultado);
+
+        let nombre = resultado.nombre
+        let apellido = resultado.apellido
+        let fechaNac = resultado.fechaNac
+        let socio = new Socio (nombre,apellido,parseInt(fechaNac))
+        console.log("qué es este nuevo socio",socio);
+        
+        SOCIOS.agregarSocio(socio)
+
+        console.log("ahora así está el array", this.listaNuevosSocios);
+        let contenedor = document.getElementById("contenedor")
+        const elememto = document.createElement("div")
+        elememto.id = socio?.numeroDeSocio
+        elememto.className = "socio"
+        elememto.innerHTML = `
+        <div class= "nombreSocio">Nombre: ${socio?.nombre}</div>
+        <div class= "nombreSocio">Apellido: ${socio?.apellido}</div>
+        <div class= "edadSocio">Edad: ${socio?.edad}</div>
+        <div class= "edadSocio">Abono: ${socio?.estado}</div>
+        <div class= "edadSocio">Año de nacimiento: ${socio?.fechaNac}</div>
+        <div class= "edadSocio">Nº de socio: ${socio?.numeroDeSocio}</div>
+        `
+        const botonBorrar = document.createElement("button")
+        botonBorrar.textContent = "Borrar"
+
+        botonBorrar.onclick = () => {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                  confirmButton: 'btn btn-success',
+                  cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+              })
+              
+              swalWithBootstrapButtons.fire({
+                title: '¿Estás seguro que querés eliminar a ' + socio.nombre + '?',
+                text: "Esta acción no se puede revertir!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'No, cancelar!',
+                reverseButtons: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  swalWithBootstrapButtons.fire(
+                    'HECHO!',
+                    'El socio ha sido eliminado.',
+                    'success'
+                  )
+                  this.borrarSocio(socio)
+                  this.borrarSocioHTML(socio)
+                  localStorage.removeItem(socio)
+                  this.LogArray()
+                  this.menoresEdad(socio)
+                  this.mayoresEdad(socio)
+                  this.creaJson()
+                  this.muestraJson()
+                } else if (
+                  /* Read more about handling dismissals below */
+                  result.dismiss === Swal.DismissReason.cancel
+                ) {
+                  swalWithBootstrapButtons.fire(
+                    'Cancelado',
+                    'No ha habido cambios',
+                    'error'
+                  )
+                }
+              })
+        }
          
             elememto.append(botonBorrar)
             contenedor.append(elememto)
-          }).catch((error) => {console.log(error)
+          //}
+        }).catch((error) => {console.log(error)
         })
     }
-    fetchAPI(){
+    fetchAPI()
+    {
       fetch('https://swapi.dev/api/people').then((response) => response.json())
         .then((resultado) => {
           console.log("Esto trae el JSON del API ",resultado);
+          const sociosBaseDeDatos = this.listaNuevosSocios.push(resultado)
+            console.log("total array + API", sociosBaseDeDatos);
           for (let index = 0; index < resultado.length; index++) {
             const persona = array[index];
             
+            
             let contenedor = document.getElementById("contenedor")
           const elememto = document.createElement("div")
-          elememto.id = persona[index]?.numeroDeSocio
+          elememto.id = sociosBaseDeDatos[index]?.numeroDeSocio
           elememto.className = "socio"
           elememto.innerHTML = `
-          <div class= "nombreSocio">Nombre: ${persona[index]?.nombre}</div>
-          <div class= "nombreSocio">Apellido: ${persona[index]?.apellido}</div>
-          <div class= "edadSocio">Edad: ${persona[index]?.edad}</div>
-          <div class= "edadSocio">Edad: ${persona[index]?.numeroDeSocio}</div>
-          <div class= "edadSocio">Nº de socio: ${persona[index]?.numeroDeSocio}</div>
+          <div class= "nombreSocio">Nombre: ${sociosBaseDeDatos?.nombre}</div>
+          <div class= "nombreSocio">Apellido: ${sociosBaseDeDatos?.apellido}</div>
+          <div class= "edadSocio">Edad: ${sociosBaseDeDatos?.edad}</div>
+          <div class= "edadSocio">Abono: ${sociosBaseDeDatos?.estado}</div>
+          <div class= "edadSocio">Año de nacimiento: ${sosociosBaseDeDatoscio?.fechaNac}</div>
+          <div class= "edadSocio">Nº de socio: ${sociosBaseDeDatos?.numeroDeSocio}</div>
           `
           const botonBorrar = document.createElement("button")
           botonBorrar.textContent = "Borrar"
@@ -341,6 +358,41 @@ class Socios{
         }).catch((error) => {console.log(error)
       })
     }
+//  fetchAPI(){
+//    const fetchApi = async (url) => {
+//          return new Promise((resolve,reject) => {
+//            fetch("https://swapi.dev/api/people").then(response => response.json())
+//            .then((resultado) => {
+//              resolve(resultado)
+//              muestraApi (resultado.results)
+//            })
+//          }).catch((error) => {
+//            reject(error)
+//          })
+//      }
+//    }
+//    muestraApi(){
+//      const muestraAPI = async(personas) => {
+//        personas.map((value,index) => {
+//        let contenedor = document.getElementById("contenedor")
+//        const elememto = document.createElement("div")
+//        elememto.id = sociosBaseDeDatos[index]?.numeroDeSocio
+//        elememto.className = "socio"
+//        elememto.innerHTML = `
+//        <div class= "nombreSocio">Nombre: ${value?.nombre}</div>
+//        <div class= "nombreSocio">Apellido: ${value?.apellido}</div>
+//        <div class= "edadSocio">Edad: ${value?.edad}</div>
+//        <div class= "edadSocio">Abono: ${value?.estado}</div>
+//        <div class= "edadSocio">Año de nacimiento: ${value?.fechaNac}</div>
+//        <div class= "edadSocio">Nº de socio: ${value?.numeroDeSocio}</div>
+//        `
+//        const botonBorrar = document.createElement("button")
+//        botonBorrar.textContent = "Borrar"
+//        }) 
+//      }
+//      elemento.append(botonBorrar)
+//      contenedor.append(elemento)
+//    }
 }
 
 
@@ -371,6 +423,8 @@ SOCIOS.muestraJson()
 SOCIOS.diaYhora()
 SOCIOS.fetchStorage()
 SOCIOS.fetchAPI()
+//SOCIOS.fetchAPI()
+//SOCIOS.muestraApi()
 
 const inputs = document.querySelectorAll(`#formulario input`)
 let expresiones = /^[a-zA-ZÀ-ÿ\s]{1,40}$/i;
