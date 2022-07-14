@@ -6,14 +6,12 @@
   box-sizing: border-box;
   text-align: center; }
 
-.fondo {
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  opacity: 0.12; }
+.cuerpo {
+  background-image: url(../imagenes/fondoTransparente.png);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat; }
 
 main {
   display: grid;
@@ -28,7 +26,10 @@ main {
   font-family: 'Balsamiq Sans', cursive;
   font-family: 'Lobster', cursive;
   font-size: 6vw;
-  color: #8ED122; }
+  color: #87C02B; }
+
+.col-md-4 .form-control {
+  border: 1px solid black; }
 
 #formulario {
   grid-row: 2;
@@ -57,10 +58,7 @@ main {
   margin: 0.6vw; }
 
 .col-12 .btn {
-  background-color: #8ED122; }
-
-.col-12hover {
-  background-color: #8ED122; }
+  background-color: #87C02B; }
 
 #fecha {
   grid-row: 1;
@@ -71,3 +69,6 @@ main {
   justify-content: center;
   font-size: 1.5vw;
   font-weight: 600; }
+
+.incorrecto {
+  background-color: red; }
