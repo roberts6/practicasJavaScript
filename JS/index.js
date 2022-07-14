@@ -335,19 +335,17 @@ class Socios{
     {
       fetch('https://swapi.dev/api/people').then((response) => response.json())
         .then((resultado) => {
-          console.log("Esto trae el JSON del API ",resultado);
-          for (let i = 0; i < resultado.length; i++) {
+          console.log("Esto trae el JSON del API ",resultado.results[0].name);
+          
+          for (let i = 0; i < resultado.results.length; i++) {
       
-        let nombre = resultado[i].results.name
-        let apellido = resultado[i].results.skin_color
+        let nombre = resultado.results[i].name
+        let apellido = resultado.results[i].skin_color
         let fechaNac = "1987/12/26"
         let socio = new Socio (nombre,apellido,parseInt(fechaNac))
         
         SOCIOS.agregarSocio(socio)
         
-            
-        console.log("ahora así está el array", this.listaNuevosSocios);
-            
           let contenedor = document.getElementById("contenedor")
           const elememto = document.createElement("div")
           elememto.id = socio?.numeroDeSocio
@@ -410,6 +408,7 @@ class Socios{
             elememto.append(botonBorrar)
             contenedor.append(elememto)
         }
+        console.log("ahora así está el array", this.listaNuevosSocios);
         }).catch((error) => {console.log(error)
       })
     }
