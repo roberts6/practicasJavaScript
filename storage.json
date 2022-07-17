@@ -1,5 +1,10 @@
 {
     "nombre": "Jeremias",
     "apellido": "Springfield",
-    "fechaNac": "1880/8/4"
+    "fechaNac": "1880/8/4",
+    "direccion": "Felipe Vallese 976",
+    "piso": "-",
+    "CP": "1324",
+    "telefono": 5562161873,
+    "mail": "JereSpringfield@gmail.com"
 }

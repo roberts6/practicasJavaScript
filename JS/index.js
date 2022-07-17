@@ -2,7 +2,7 @@ const fechaHoy = new Date();
 
 // clase que construye socio con su información
 class Socio {
-    constructor (nombre,apellido, fechaNac) {
+    constructor (nombre,apellido, fechaNac, direccion, piso, CP, telefono, mail) {
 this.nombre = nombre;
 this.apellido = apellido;
 this.fechaNac = fechaNac;
@@ -10,7 +10,11 @@ this.edad = this.calcularEdad();
 
 this.estado = (this.edad > 10) ? "Mayor" : "Menor" // --> operador ternario. Evalua una condición y retorna, en este caso, 2 posibles respuestas
 this.numeroDeSocio = Math.round (Math.random() * 10000);;
-//this.anoActual = ano.getFullYear();
+this.direccion = direccion;
+this.piso = piso;
+this.CP = CP;
+this.telefono = telefono;
+this.mail = mail;
     }
     SocioID (){
         return this.numeroDeSocio * 2;
@@ -59,7 +63,7 @@ class Socios{
         (this.listaNuevosSocios.length) + 1
     }
     LogArray(){
-        console.log("Total de socios:",this.listaNuevosSocios);
+        //console.log("Total de socios:",this.listaNuevosSocios);
         
     }
     mostrarEnHTML(){
@@ -213,12 +217,12 @@ class Socios{
        let storage = localStorage.getItem("listadoSocios")
         for (let index = 0; index < localStorage.length; index++) {
             const listaJson = localStorage.key(index);
-            console.log("En el localStorage hay guardados:",JSON.parse(storage));
+            //console.log("En el localStorage hay guardados:",JSON.parse(storage));
         } 
     }
     menoresEdad(socio){
         const menores = this.listaNuevosSocios.filter(socio => socio.edad <= 10)
-        console.log("Estos son los socios menores de edad:",menores)
+        //console.log("Estos son los socios menores de edad:",menores)
     const menoresEdad = [];
   for (let index = 0; index < menores.length; index++) {
         menoresEdad.push(menores[index].nombre)
@@ -227,7 +231,7 @@ class Socios{
 }
     mayoresEdad(socio){
         const mayores = this.listaNuevosSocios.filter(socio => socio.edad > 10)
-    console.log("Estos son los socios mayores de edad:",mayores)
+    //console.log("Estos son los socios mayores de edad:",mayores)
 
     const mayoresEdad = [];
     for (let index = 0; index < mayores.length; index++) {
@@ -252,12 +256,17 @@ class Socios{
     fetchStorage(socio){
       fetch('/storage.json').then((response) => response.json())
       .then((resultado) => {
-        console.log("Esto trae el JSON ",resultado);
+        //console.log("Esto trae el JSON ",resultado);
 
         let nombre = resultado.nombre
         let apellido = resultado.apellido
         let fechaNac = resultado.fechaNac
-        let socio = new Socio (nombre,apellido,parseInt(fechaNac))
+        let direccion = resultado.direccion
+        let piso = resultado.piso
+        let CP = resultado.CP
+        let telefono = resultado.telefono
+        let mail = resultado.mail
+        let socio = new Socio (nombre,apellido,parseInt(fechaNac),direccion,piso,CP,telefono,mail)
         
         this.agregarSocio(socio)
         this.creaJson()
@@ -265,7 +274,7 @@ class Socios{
         this.menoresEdad(socio)
         this.muestraJson()
 
-        console.log("ahora así está el array", this.listaNuevosSocios);
+        //console.log("ahora así está el array", this.listaNuevosSocios);
         let contenedor = document.getElementById("contenedor")
         const elememto = document.createElement("div")
         elememto.id = socio?.numeroDeSocio
@@ -335,14 +344,19 @@ class Socios{
     {
       fetch('https://swapi.dev/api/people').then((response) => response.json())
         .then((resultado) => {
-          console.log("Esto trae el JSON del API ",resultado.results[0].name);
+          //console.log("Esto trae el JSON del API ",resultado.results[0].name);
           
           for (let i = 0; i < resultado.results.length; i++) {
       
         let nombre = resultado.results[i].name
         let apellido = resultado.results[i].skin_color
         let fechaNac = "1987/12/26"
-        let socio = new Socio (nombre,apellido,parseInt(fechaNac))
+        let direccion = document.querySelector("#validationDireccion").value
+        let CP = document.querySelector("#validationCP").value
+        let piso = document.querySelector("#validationPiso").value
+        let mail = document.querySelector("#validationMail").value
+        let telefono = document.querySelector("#validationTelefono").value
+        let socio = new Socio (nombre,apellido,parseInt(fechaNac),direccion,piso,CP,telefono,mail)
         
         SOCIOS.agregarSocio(socio)
         
@@ -408,7 +422,7 @@ class Socios{
             elememto.append(botonBorrar)
             contenedor.append(elememto)
         }
-        console.log("ahora así está el array", this.listaNuevosSocios);
+        //console.log("ahora así está el array", this.listaNuevosSocios);
         }).catch((error) => {console.log(error)
       })
     }
@@ -442,8 +456,7 @@ SOCIOS.muestraJson()
 SOCIOS.diaYhora()
 SOCIOS.fetchStorage()
 SOCIOS.fetchAPI()
-//SOCIOS.fetchAPI()
-//SOCIOS.muestraApi()
+
 
 const inputs = document.querySelectorAll(`#formulario input`)
 let expresiones = /^[a-zA-ZÀ-ÿ\s]{1,40}$/i;
@@ -468,7 +481,7 @@ const validarForm = (e) => {
 }
 
 inputs.forEach((input) => {
-  console.log(input.addEventListener('keyup', validarForm));
+  input.addEventListener('keyup', validarForm);
    
   input.addEventListener('blur', validarForm)
   });
@@ -479,21 +492,26 @@ const submitFormulario = async (ID) => {
     let form = await document.getElementById(ID);
     form.addEventListener(`submit`, (event) => {
     event.preventDefault();
+    Swal.fire({
+      icon: 'success',
+      title: 'Usuario agregado',
+      showConfirmButton: false,
+      timer: 1500
+    })
     let nombre = document.querySelector("#validationDefaultNombre").value
     let apellido = document.querySelector("#validationDefaultApellido").value
     let fechaNac = document.querySelector("#validationDefaultFechaNac").value
+    let direccion = document.querySelector("#validationDireccion").value
+    let piso = document.querySelector("#validationPiso").value
+    let CP = document.querySelector("#validationCP").value
+    let telefono = document.querySelector("#validationTelefono").value
+    let mail = document.querySelector("#validationMail").value
     
-    console.log("nació en: ",fechaNac);
-    
+    //console.log("nació en: ",fechaNac);
 
-
-    //let dia = document.querySelector("#validationDefaultNombre").value
-    //let mes = document.querySelector("#validationDefaultNombre").value
-    //let anoNacimiento = document.querySelector("#validationDefaultNombre").value
-
-    let socio = new Socio (nombre,apellido,parseInt(fechaNac))
+    let socio = new Socio (nombre,apellido,parseInt(fechaNac),direccion,piso,CP,telefono,mail)
     SOCIOS.agregarSocio(socio)
-    console.log(socio);
+    //console.log(socio);
     SOCIOS.mostrarUltimoSocio(socio)
     SOCIOS.menoresEdad(socio)
     SOCIOS.mayoresEdad(socio)

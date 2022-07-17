@@ -36,10 +36,9 @@ main {
   grid-column: 2/10;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  align-content: center;
-  align-items: center; }
+  align-content: center; }
 
 #contenedor {
   grid-row: 3;

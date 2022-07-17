@@ -14,7 +14,6 @@
     <title>FCO</title>
 </head>
 <body class="cuerpo">
-   <!-- <img src="./imagenes/fondo.jpeg" class="fondo" alt=""> -->
   <main>
     <h1 class="titulo">Club Ferro Carril Oeste</h1>
 <div id="fecha"></div>
@@ -22,11 +21,13 @@
 <form id = "formulario">
         <div class="col-md-4">
           <label for="validationDefault01" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="validationDefaultNombre" name="nombre" required>
+          <input type="text" class="form-control" id="validationDefaultNombre" name="nombre" minlength="2" required>
+          <div id="emailHelp" class="form-text">Mínimo 2 letras</div>
         </div>
         <div class="col-md-4">
           <label for="validationDefault02" class="form-label">Apellido</label>
-          <input type="text" class="form-control" id="validationDefaultApellido" name="apellido" required>
+          <input type="text" class="form-control" id="validationDefaultApellido" name="apellido" minlength="2" required>
+          <div id="emailHelp" class="form-text">Mínimo 2 letras</div>
         </div>
         <div class="col-md-4">
           <label for="validationDefaultUsername" class="form-label">Fecha Nacimiento</label>
@@ -34,21 +35,32 @@
             <input type="date" class="form-control" id="validationDefaultFechaNac"  aria-describedby="inputGroupPrepend2" required>
           </div>
         </div>
-      <!--  <div class="col-md-6">
-          <label for="validationDefault03" class="form-label">City</label>
-          <input type="text" class="form-control" id="validationDefault03" required>
+       <div class="col-md-4">
+          <label for="validationDefault03" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="validationDireccion" required>
+          <div id="emailHelp" class="form-text">Ej: Federico García Lorca 350</div>
         </div>
-        <div class="col-md-3">
-          <label for="validationDefault04" class="form-label">State</label>
-          <select class="form-select" id="validationDefault04" required>
-            <option selected disabled value="">Choose...</option>
-            <option>...</option>
+        <div class="col-md-4">
+          <label for="validationDefault04" class="form-label">Piso</label>
+          <input type="text" class="form-control" id="validationPiso" required>
+          <div id="emailHelp" class="form-text">Ej: 1 B</div>
+        </div>
+        <div class="col-md-4">
+          <label for="validationDefault05" class="form-label">Código Postal</label>
+            <input type="text" class="form-control" id="validationCP" required> 
+            <div id="emailHelp" class="form-text">Incluir letras</div>
           </select>
         </div>
-        <div class="col-md-3">
-          <label for="validationDefault05" class="form-label">Zip</label>
-          <input type="text" class="form-control" id="validationDefault05" required>
-        </div>-->
+        <div class="col-md-4">
+          <label for="exampleInputPhone" class="form-label">Teléfono</label>
+          <input type="number" class="form-control" id="validationTelefono" minlength="10" maxlength="14" required>
+          <div id="emailHelp" class="form-text">Mínimo 10 dígitos, máximo 14</div>
+        </div>
+        <div class="col-md-4">
+          <label for="exampleInputEmail1" class="form-label">Mail</label>
+          <input type="email" class="form-control" id="validationMail" aria-describedby="emailHelp" required>
+          <div id="emailHelp" class="form-text">Ej: alguien@algo.com</div>
+        </div>
         <div class="col-12">
           <button class="btn btn-primary" type="submit">Agregar</button>
         </div>
