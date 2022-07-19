@@ -69,5 +69,5 @@ main {
   font-size: 1.5vw;
   font-weight: 600; }
 
-.incorrecto {
+#validationTelefono .incorrecto {
   background-color: red; }

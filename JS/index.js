@@ -504,7 +504,8 @@ const submitFormulario = async (ID) => {
     let direccion = document.querySelector("#validationDireccion").value
     let piso = document.querySelector("#validationPiso").value
     let CP = document.querySelector("#validationCP").value
-    let telefono = document.querySelector("#validationTelefono").value
+    document.querySelector("#validationTelefono").value.length < 10 ? telefono = document.querySelector("#validationTelefono").value : phonelHelp.className = "incorrecto"
+    
     let mail = document.querySelector("#validationMail").value
     
     //console.log("nació en: ",fechaNac);

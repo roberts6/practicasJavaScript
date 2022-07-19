@@ -85,6 +85,8 @@ $colorVerde:#87C02B;
         font-weight: 600;
     }
 
-    .incorrecto{
-        background-color: red;
+    #validationTelefono{
+        .incorrecto{
+            background-color: red;
+        }
     }
