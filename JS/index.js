@@ -499,16 +499,24 @@ const submitFormulario = async (ID) => {
       timer: 1500
     })
     let nombre = document.querySelector("#validationDefaultNombre").value
+    document.querySelector("#validationDefaultNombre").value = ""
     let apellido = document.querySelector("#validationDefaultApellido").value
+    document.querySelector("#validationDefaultApellido").value = ""
     let fechaNac = document.querySelector("#validationDefaultFechaNac").value
+    document.querySelector("#validationDefaultFechaNac").value = ""
     let direccion = document.querySelector("#validationDireccion").value
+    document.querySelector("#validationDireccion").value = ""
     let piso = document.querySelector("#validationPiso").value
+    document.querySelector("#validationPiso").value = ""
     let CP = document.querySelector("#validationCP").value
+    document.querySelector("#validationCP").value = ""
     let telefono = document.querySelector("#validationTelefono").value
     //funciona pero no quiero un alert -->
      telefono.length < 10 ? alert("El número de teléfono debe ser igual o mayor a 10 dígitos") : telefono.value
     // no me funciona agregando color desde JS --> telefono.length < 10 ? telefono.style.backgroundColor = 'red' : telefono.value
+    document.querySelector("#validationTelefono").value = ""
     let mail = document.querySelector("#validationMail").value
+    document.querySelector("#validationMail").value = ""
     
     //console.log("nació en: ",fechaNac);
 
@@ -529,6 +537,7 @@ const submitFormulario = async (ID) => {
 
 // invocación para que el formulario tome los datos ingresados
 submitFormulario("formulario")
+
 
 
 
