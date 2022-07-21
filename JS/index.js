@@ -465,16 +465,16 @@ const validarForm = (e) => {
   switch (e.target.value) {
    case "nombre":
       if (expresiones.test(e.target.value)) {
-        document.getElementById("validationDefaultNombre").classList.remove("incorrecto")
+        document.getElementById("validationDefaultNombre").className.remove("incorrecto")
       }else{
-          document.getElementById("validationDefaultNombre").classList.add("incorrecto")
+          document.getElementById("validationDefaultNombre").className.add("incorrecto")
       }
       break;
      case "apellido":
       if (expresiones.test(e.target.value)) {
-        document.getElementById("validationDefaultNombre").classList.remove("incorrecto")
+        document.getElementById("validationDefaultNombre").className.remove("incorrecto")
       }else{
-        document.getElementById("validationDefaultNombre").classList.add("incorrecto")
+        document.getElementById("validationDefaultNombre").className.add("incorrecto")
       }
      break;
   }
@@ -512,8 +512,8 @@ const submitFormulario = async (ID) => {
     document.querySelector("#validationCP").value = ""
     let telefono = document.querySelector("#validationTelefono").value
     //funciona pero no quiero un alert -->
-     telefono.length < 10 ? alert("El número de teléfono debe ser igual o mayor a 10 dígitos") : telefono.value
-    // no me funciona agregando color desde JS --> telefono.length < 10 ? telefono.style.backgroundColor = 'red' : telefono.value
+     telefono.length < 10 || telefono.length > 14 ? alert("El número de teléfono debe ser igual o mayor a 10 dígitos y menor de 14") : telefono.value
+    // no me funciona agregando color desde JS --> telefono.length < 10 ? document.querySelector("#validationTelefono").style.backgroundColor = 'red' : telefono.value
     document.querySelector("#validationTelefono").value = ""
     let mail = document.querySelector("#validationMail").value
     document.querySelector("#validationMail").value = ""
