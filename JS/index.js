@@ -511,9 +511,11 @@ const submitFormulario = async (ID) => {
     let CP = document.querySelector("#validationCP").value
     document.querySelector("#validationCP").value = ""
     let telefono = document.querySelector("#validationTelefono").value
-    //funciona pero no quiero un alert -->
-     telefono.length < 10 || telefono.length > 14 ? alert("El número de teléfono debe ser igual o mayor a 10 dígitos y menor de 14") : telefono.value
+    //funciona pero no quiero un alert -->telefono.length < 10 || telefono.length > 14 ? alert("El número de teléfono debe ser igual o mayor a 10 dígitos y menor de 14") : telefono.value
     // no me funciona agregando color desde JS --> telefono.length < 10 ? document.querySelector("#validationTelefono").style.backgroundColor = 'red' : telefono.value
+    let validarTelefono = () => {
+      
+    }
     document.querySelector("#validationTelefono").value = ""
     let mail = document.querySelector("#validationMail").value
     document.querySelector("#validationMail").value = ""
